@@ -1,0 +1,27 @@
+{
+  "version": "1.0.0",
+  "description": "The Aleo snap.",
+  "proposedName": "Aleo snap",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chainsafe/aleo-snap.git"
+  },
+  "source": {
+    "shasum": "",
+    "location": {
+      "npm": {
+        "filePath": "./dist/bundle.js",
+        "packageName": "@chainsafe/aleo-snap",
+        "registry": "https://registry.npmjs.org/"
+      }
+    }
+  },
+  "initialPermissions": {
+    "endowment:rpc": {
+      "dapps": true,
+      "snaps": true
+    },
+    "snap_dialog": {}
+  },
+  "manifestVersion": "0.1"
+}
