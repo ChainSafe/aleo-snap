@@ -5,6 +5,13 @@ __metadata:
   version: 6
   cacheKey: 8c0
 
+"@aleohq/wasm@npm:^0.4.1":
+  version: 0.4.1
+  resolution: "@aleohq/wasm@npm:0.4.1"
+  checksum: f7a078b7087457d0b580bdbab2d537094beac845e406e4748c560932a7e7a2f3f7af83748b5480146095db9305de7984de94fc931e774d10c532093ff994ddf5
+  languageName: node
+  linkType: hard
+
 "@ampproject/remapping@npm:^2.2.0":
   version: 2.2.1
   resolution: "@ampproject/remapping@npm:2.2.1"
@@ -1334,6 +1341,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@chainsafe/aleo-snap@workspace:packages/snap":
+  version: 0.0.0-use.local
+  resolution: "@chainsafe/aleo-snap@workspace:packages/snap"
+  dependencies:
+    "@aleohq/wasm": ^0.4.1
+    "@metamask/snaps-cli": ^0.32.2
+    "@metamask/snaps-types": ^0.32.2
+    "@types/eslint": ^8.37.0
+    "@types/node": 18.15.11
+    eslint: ^8.37.0
+    typescript: ^5.0.3
+  languageName: unknown
+  linkType: soft
+
 "@chainsafe/as-sha256@npm:^0.4.1":
   version: 0.4.1
   resolution: "@chainsafe/as-sha256@npm:0.4.1"
@@ -2323,19 +2344,6 @@ __metadata:
   checksum: 41e23642cbe545889245b9d2a45854ebba51cda6c778ebced9649420d9205f2efb39cb43dbc41e358409223b1ea43303ae4839db682c848b891e4811da1a5a71
   languageName: node
   linkType: hard
-
-"aleo-snap@workspace:packages/snap":
-  version: 0.0.0-use.local
-  resolution: "aleo-snap@workspace:packages/snap"
-  dependencies:
-    "@metamask/snaps-cli": ^0.32.2
-    "@metamask/snaps-types": ^0.32.2
-    "@types/eslint": ^8.37.0
-    "@types/node": 18.15.11
-    eslint: ^8.37.0
-    typescript: ^5.0.3
-  languageName: unknown
-  linkType: soft
 
 "ansi-regex@npm:^5.0.1":
   version: 5.0.1
