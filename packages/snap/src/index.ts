@@ -1,15 +1,19 @@
 import { OnRpcRequestHandler } from "@metamask/snaps-types";
+import { getAccount } from "./rpc/getAccount";
 
-export enum Methods {
-  GetAddress = "aleo_getAddress",
+ enum Methods {
+  GetAccount = "aleo_getAccount",
+  GetViewKey = "aleo_getViewKey",
+  Decrypt = "aleo_decrypt",
+  Sign = "aleo_sign",
+  Verify = "aleo_verify",
 }
 
 export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
+  
   switch (request.method) {
-    case Methods.GetAddress:
-      return await new Promise((resolve) => {
-        resolve(null);
-      });
+    case Methods.GetAccount:
+      return getAccount();
     default:
       throw new Error("Method not found.");
   }
