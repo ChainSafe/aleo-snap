@@ -1,0 +1,16 @@
+{
+  "name": "aleo-snap-wasm",
+  "version": "0.0.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc --build && spack"
+  },
+  "browser": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "devDependencies": {
+    "@swc/cli": "^0.1.62",
+    "@swc/core": "^1.3.57",
+    "typescript": "^5.0.4"
+  }
+}
