@@ -5,9 +5,8 @@
   "license": "MIT",
   "scripts": {
     "build": "yarn run build:snap",
-    "build:snap": "yarn build:snap:bundle && yarn build:snap:postprocess && yarn build:snap:eval",
-    "build:snap:bundle": "mm-snap build --src src/index.ts --sourceMaps true  --writeManifest false --manifest false --verboseErrors --eval false",
-    "build:snap:postprocess": "node ./post-process.js && mm-snap manifest --fix",
+    "build:snap": "yarn build:snap:bundle && yarn build:snap:eval",
+    "build:snap:bundle": "mm-snap build --src src/index.ts --sourceMaps true --verboseErrors",
     "build:snap:eval": "mm-snap eval -b dist/bundle.js --verboseErrors",
     "lint": "eslint --color --ext .ts src/",
     "lint:fix": "yarn run lint --fix",
@@ -38,6 +37,7 @@
     "typescript": "^5.0.3"
   },
   "dependencies": {
-    "@aleohq/wasm": "^0.4.1"
+    "@aleohq/wasm": "^0.4.1",
+    "aleo-snap-wasm": "workspace:*"
   }
 }
