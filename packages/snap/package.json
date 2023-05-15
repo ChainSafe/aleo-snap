@@ -4,18 +4,12 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "yarn run build:snap",
-    "build:bareminimum": "mm-snap build",
-    "build:snap": "yarn build:snap:bundle && yarn build:snap:eval",
-    "build:snap:bundle": "mm-snap build --eval false",
-    "build:snap:eval": "mm-snap eval -b dist/bundle.js --verboseErrors",
+    "build": "tsc",
+    "start": "mm-snap serve",
     "lint": "eslint --color --ext .ts src/",
     "lint:fix": "yarn run lint --fix",
     "test:unit": "echo",
     "test:integrations": "echo"
-  },
-  "dependencies": {
-    "aleo-snap-wasm": "workspace:*"
   },
   "devDependencies": {
     "@metamask/snaps-cli": "^0.32.2",
