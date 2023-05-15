@@ -52,7 +52,7 @@ export class ExecutionResponse {
 * required as part of the transaction. However, it can be executed in parallel to execution of
 * main program in separate web workers prior to creation of the transaction.
 */
-export class FeeExecution {wasmInit
+export class FeeExecution {
   free(): void;
 /**
 * Get the amount of the fee
