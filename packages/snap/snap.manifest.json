@@ -2,6 +2,10 @@
   "version": "1.0.0",
   "description": "The Aleo snap.",
   "proposedName": "Aleo snap",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chainsafe/aleo-snap.git"
+  },
   "source": {
     "shasum": "",
     "location": {
