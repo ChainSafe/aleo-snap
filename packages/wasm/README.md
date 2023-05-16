@@ -28,7 +28,7 @@ yarn stringify:wasm
 
 build project
 ```shell
-yarn build
+yarn build:bundle
 ```
 
 copy type definitions from `./src/wasmBuild` to `./lib/wasmBuild`  

@@ -3,7 +3,10 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "build": "tsc --build && spack",
+    "prebuild": "rimraf lib",
+    "build": "yarn stringify:wasm && yarn build:bundle && yarn copy:dts",
+    "build:bundle": "tsc --build && spack",
+    "copy:dts": "mkdir ./lib/wasmBuild && cp ./src/wasmBuild/aleo_wasm.d.ts ./lib/wasmBuild/aleo_wasm.d.ts",
     "stringify:wasm": "node -r ts-node/register ./scripts/stringifyWasm.ts"
   },
   "main": "lib/index.js",
