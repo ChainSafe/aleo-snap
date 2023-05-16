@@ -4,12 +4,18 @@ import sinonChai from "sinon-chai";
 import { getAccount } from "../../../src/rpc/getAccount";
 import { mockSnapProvider } from "./wallet.stub";
 import { bip44Entropy1Node } from "../aleo/bip44Entropy.mock";
+import { initializeWasm } from "aleo-snap-wasm";
 
 chai.use(sinonChai);
 
 describe("Test rpc handler function: getAccount", function () {
   const sanbox = sinon.createSandbox();
   const snapStub = mockSnapProvider(sanbox);
+
+  before(async function () {
+    // @ts-ignore
+    global.wasm = await initializeWasm();
+  });
 
   afterEach(function () {
     sanbox.reset();
