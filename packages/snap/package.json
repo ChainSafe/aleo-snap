@@ -11,7 +11,8 @@
     "lint": "eslint --color --ext .ts src/",
     "lint:fix": "yarn run lint --fix",
     "serve": "mm-snap serve",
-    "test:unit": "echo",
+    "test": "yarn run test:unit",
+    "test:unit": "mocha --colors -r ts-node/register \"test/unit/**/*.test.ts\"",
     "test:integrations": "echo"
   },
   "repository": {
@@ -31,9 +32,18 @@
   "devDependencies": {
     "@metamask/snaps-cli": "^0.32.2",
     "@metamask/snaps-types": "^0.32.2",
+    "@types/chai": "^4",
     "@types/eslint": "^8.37.0",
+    "@types/mocha": "^10.0.1",
     "@types/node": "18.15.11",
+    "@types/sinon": "^10.0.14",
+    "@types/sinon-chai": "^3.2.9",
+    "chai": "^4.3.7",
     "eslint": "^8.37.0",
+    "mocha": "^10.2.0",
+    "sinon": "^15.0.4",
+    "sinon-chai": "^3.7.0",
+    "ts-node": "^10.9.1",
     "typescript": "^5.0.3"
   },
   "dependencies": {
