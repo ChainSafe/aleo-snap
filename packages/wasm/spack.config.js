@@ -5,7 +5,7 @@ module.exports = config({
     mode: "production",
     module: {},
     options: undefined,
-    target: "browser",
+    target: "node",
     workingDir: "",
     entry: {
         web: __dirname + "/src/index.ts",
