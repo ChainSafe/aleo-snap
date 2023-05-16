@@ -2,10 +2,10 @@ const { config } = require("@swc/core/spack");
 
 module.exports = config({
     externalModules: [],
-    mode: undefined,
+    mode: "production",
     module: {},
     options: undefined,
-    target: "node",
+    target: "browser",
     workingDir: "",
     entry: {
         web: __dirname + "/src/index.ts",

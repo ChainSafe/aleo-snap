@@ -3,20 +3,12 @@
   "jsc": {
       "parser": {
         "syntax": "typescript",
-        "tsx": false,
-        "decorators": false,
-        "dynamicImport": false
       },
-      "target": "es2015"
+      "target": "es2015",
+      "keepClassNames": true
     },
   "module": {
       "type": "umd",
       "globals": {},
-
-      // These are defaults.
-      "strict": false,
-      "strictMode": true,
-      "lazy": false,
-      "noInterop": false
     }
 }
