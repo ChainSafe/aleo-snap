@@ -1,21 +1,53 @@
 {
-  "name": "aleo-snap",
+  "name": "@chainsafe/aleo-snap",
   "version": "0.0.1",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
+    "build": "yarn run build:snap",
+    "build:snap": "yarn build:snap:bundle && yarn build:snap:eval",
+    "build:snap:bundle": "mm-snap build --src src/index.ts --sourceMaps true --verboseErrors",
+    "build:snap:eval": "mm-snap eval -b dist/bundle.js --verboseErrors",
     "lint": "eslint --color --ext .ts src/",
     "lint:fix": "yarn run lint --fix",
-    "test:unit": "echo",
+    "serve": "mm-snap serve",
+    "test": "yarn run test:unit",
+    "test:unit": "mocha --colors -r ts-node/register \"test/unit/**/*.test.ts\"",
     "test:integrations": "echo"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chainsafe/aleo-snap.git"
+  },
+  "keywords": [
+    "aleo",
+    "metamask",
+    "snap",
+    "plugin",
+    "dapp",
+    "wallet"
+  ],
+  "author": "ChainSafe <info@chainsafe.io>",
+  "homepage": "https://github.com/chainsafe/aleo-snap#readme",
   "devDependencies": {
     "@metamask/snaps-cli": "^0.32.2",
     "@metamask/snaps-types": "^0.32.2",
+    "@types/chai": "^4",
     "@types/eslint": "^8.37.0",
+    "@types/mocha": "^10.0.1",
     "@types/node": "18.15.11",
+    "@types/sinon": "^10.0.14",
+    "@types/sinon-chai": "^3.2.9",
+    "chai": "^4.3.7",
     "eslint": "^8.37.0",
+    "mocha": "^10.2.0",
+    "sinon": "^15.0.4",
+    "sinon-chai": "^3.7.0",
+    "ts-node": "^10.9.1",
     "typescript": "^5.0.3"
+  },
+  "dependencies": {
+    "@aleohq/wasm": "^0.4.1",
+    "aleo-snap-wasm": "workspace:*"
   }
 }

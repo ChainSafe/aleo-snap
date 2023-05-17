@@ -17,8 +17,8 @@ jobs:
           cache: 'yarn' # cache node modules
           node-version: 18
       - run: corepack enable
-      - run: yarn install # install dependencies
-      - run: yarn run lint # lint code
+      - run: yarn install --immutable # install dependencies
       - run: yarn run build # compile typescript into javascript
+      - run: yarn run lint # lint code
       - run: yarn run test:unit # run unit tests
       - run: yarn run test:integrations # run integration tests

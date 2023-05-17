@@ -1,15 +1,26 @@
 import { OnRpcRequestHandler } from "@metamask/snaps-types";
+import { InitOutput, initializeWasm } from "aleo-snap-wasm";
+import { getAccount } from "./rpc/getAccount";
 
-export enum Methods {
-  GetAddress = "aleo_getAddress",
+enum Methods {
+  GetAccount = "aleo_getAccount",
+  GetViewKey = "aleo_getViewKey",
+  Decrypt = "aleo_decrypt",
+  Sign = "aleo_sign",
+  Verify = "aleo_verify",
 }
 
+let wasm: InitOutput;
+
 export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
+  if (!wasm) {
+    wasm = await initializeWasm();
+  }
+
   switch (request.method) {
-    case Methods.GetAddress:
-      return await new Promise((resolve) => {
-        resolve(null);
-      });
+    case Methods.GetAccount: {
+      return getAccount(snap);
+    }
     default:
       throw new Error("Method not found.");
   }
