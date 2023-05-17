@@ -1,0 +1,25 @@
+{
+  "name": "aleo-snap-wasm",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "prebuild": "rimraf lib",
+    "build": "yarn prebuild && yarn stringify:wasm && yarn build:bundle && yarn copy:dts",
+    "build:bundle": "tsc --build && yarn esbuild:bundle",
+    "esbuild:bundle": "esbuild ./src/index.ts --bundle --outfile=./lib/index.js --format=cjs",
+    "copy:dts": "mkdir ./lib/wasmBuild && cp ./src/wasmBuild/aleo_wasm.d.ts ./lib/wasmBuild/aleo_wasm.d.ts",
+    "stringify:wasm": "node -r ts-node/register ./scripts/stringifyWasm.ts"
+  },
+  "main": "lib/index.js",
+  "browser": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "devDependencies": {
+    "esbuild": "^0.17.19",
+    "rimraf": "^5.0.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "@aleohq/wasm": "^0.4.1"
+  }
+}
