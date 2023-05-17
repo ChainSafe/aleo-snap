@@ -4,7 +4,8 @@ import { assert } from "superstruct";
 import { getAccount } from "./rpc/getAccount";
 import { getViewKey } from "./rpc/getViewKey";
 import { decryptRecord } from "./rpc/decryptRecord";
-import { decryptRecordSchema } from "./utils/params";
+import { decryptRecordSchema, signSchema } from "./utils/params";
+import { sign } from "./rpc/sign";
 
 enum Methods {
   GetAccount = "aleo_getAccount",
@@ -33,6 +34,10 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
     case Methods.DecryptRecord: {
       assert(request.params, decryptRecordSchema);
       return decryptRecord(snap, request.params);
+    }
+    case Methods.Sign: {
+      assert(request.params, signSchema);
+      return sign(snap, request.params.message);
     }
     default:
       throw new Error("Method not found.");
