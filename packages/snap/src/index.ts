@@ -15,8 +15,6 @@ let wasm: InitOutput;
 export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
   if (!wasm) {
     wasm = await initializeWasm();
-  } else {
-    console.log("initialized wasm");
   }
 
   switch (request.method) {
