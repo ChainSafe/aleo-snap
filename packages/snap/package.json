@@ -48,6 +48,7 @@
   },
   "dependencies": {
     "@aleohq/wasm": "^0.4.1",
-    "aleo-snap-wasm": "workspace:*"
+    "aleo-snap-wasm": "workspace:*",
+    "superstruct": "^1.0.3"
   }
 }
