@@ -32,7 +32,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
     }
     case Methods.DecryptRecord: {
       assert(request.params, decryptRecordSchema);
-      return decryptRecord(request.params);
+      return decryptRecord(snap, request.params);
     }
     default:
       throw new Error("Method not found.");

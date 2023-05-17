@@ -1,11 +1,11 @@
-import { Describe, object, string } from "superstruct";
+import { Describe, object, optional, string } from "superstruct";
 
 export interface DecryptRecordParams {
-  viewKey: string;
+  viewKey?: string;
   cipherText: string;
 }
 
 export const decryptRecordSchema: Describe<DecryptRecordParams> = object({
-  viewKey: string(),
+  viewKey: optional(string()),
   cipherText: string(),
 });

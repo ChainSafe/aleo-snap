@@ -3,11 +3,14 @@ import sinon from "sinon";
 import sinonChai from "sinon-chai";
 import { initializeWasm } from "aleo-snap-wasm";
 import { decryptRecord } from "../../../src/rpc/decryptRecord";
+import { mockSnapProvider } from "./wallet.stub";
+import { bip44Entropy1Node } from "../aleo/bip44Entropy.mock";
 
 chai.use(sinonChai);
 
 describe("Test rpc handler function: decryptRecord", function () {
   const sanbox = sinon.createSandbox();
+  const snapStub = mockSnapProvider(sanbox);
 
   before(async function () {
     // @ts-ignore
@@ -18,9 +21,13 @@ describe("Test rpc handler function: decryptRecord", function () {
     sanbox.reset();
   });
 
-  it("should return decrypted record", function () {
+  it("should return decrypted record with matching cipherText-viewKey", async function () {
+    snapStub.request
+    .withArgs(sinon.match.has("method", "snap_getBip44Entropy"))
+    .resolves(bip44Entropy1Node);
 
-    const record = decryptRecord(
+    const record = await decryptRecord(
+      snapStub,
       {
         cipherText: "record1qyqsqpe2szk2wwwq56akkwx586hkndl3r8vzdwve32lm7elvphh37rsyqyxx66trwfhkxun9v35hguerqqpqzqrtjzeu6vah9x2me2exkgege824sd8x2379scspmrmtvczs0d93qttl7y92ga0k0rsexu409hu3vlehe3yxjhmey3frh2z5pxm5cmxsv4un97q",
         viewKey: "AViewKey1ccEt8A2Ryva5rxnKcAbn7wgTaTsb79tzkKHFpeKsm9NX"
