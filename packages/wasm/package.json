@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "prebuild": "rimraf lib",
-    "build": "yarn stringify:wasm && yarn build:bundle && yarn copy:dts",
+    "build": "yarn prebuild && yarn stringify:wasm && yarn build:bundle && yarn copy:dts",
     "build:bundle": "tsc --build && yarn esbuild:bundle",
-    "esbuild:bundle": "esbuild ./src/index.ts --bundle --outfile=./lib/index.js",
+    "esbuild:bundle": "esbuild ./src/index.ts --bundle --outfile=./lib/index.js --format=cjs",
     "copy:dts": "mkdir ./lib/wasmBuild && cp ./src/wasmBuild/aleo_wasm.d.ts ./lib/wasmBuild/aleo_wasm.d.ts",
     "stringify:wasm": "node -r ts-node/register ./scripts/stringifyWasm.ts"
   },
