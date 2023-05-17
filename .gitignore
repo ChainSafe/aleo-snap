@@ -5,6 +5,8 @@ node_modules
 dist
 lib
 
+/packages/wasm
+
 # Non zero install strategy
 .pnp.*
 .yarn/*
