@@ -1341,11 +1341,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@chainsafe/aleo-snap-wasm@workspace:^, @chainsafe/aleo-snap-wasm@workspace:packages/wasm":
+  version: 0.0.0-use.local
+  resolution: "@chainsafe/aleo-snap-wasm@workspace:packages/wasm"
+  dependencies:
+    "@aleohq/wasm": ^0.4.1
+    esbuild: ^0.17.19
+    rimraf: ^5.0.0
+    ts-node: ^10.9.1
+    typescript: ^5.0.4
+  languageName: unknown
+  linkType: soft
+
 "@chainsafe/aleo-snap@workspace:packages/snap":
   version: 0.0.0-use.local
   resolution: "@chainsafe/aleo-snap@workspace:packages/snap"
   dependencies:
-    "@aleohq/wasm": ^0.4.1
+    "@chainsafe/aleo-snap-wasm": "workspace:^"
     "@metamask/snaps-cli": ^0.32.2
     "@metamask/snaps-types": ^0.32.2
     "@types/chai": ^4
@@ -1354,7 +1366,6 @@ __metadata:
     "@types/node": 18.15.11
     "@types/sinon": ^10.0.14
     "@types/sinon-chai": ^3.2.9
-    aleo-snap-wasm: "workspace:*"
     chai: ^4.3.7
     eslint: ^8.37.0
     mocha: ^10.2.0
@@ -2683,18 +2694,6 @@ __metadata:
   checksum: 41e23642cbe545889245b9d2a45854ebba51cda6c778ebced9649420d9205f2efb39cb43dbc41e358409223b1ea43303ae4839db682c848b891e4811da1a5a71
   languageName: node
   linkType: hard
-
-"aleo-snap-wasm@workspace:*, aleo-snap-wasm@workspace:packages/wasm":
-  version: 0.0.0-use.local
-  resolution: "aleo-snap-wasm@workspace:packages/wasm"
-  dependencies:
-    "@aleohq/wasm": ^0.4.1
-    esbuild: ^0.17.19
-    rimraf: ^5.0.0
-    ts-node: ^10.9.1
-    typescript: ^5.0.4
-  languageName: unknown
-  linkType: soft
 
 "ansi-colors@npm:4.1.1":
   version: 4.1.1

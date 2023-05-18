@@ -1,5 +1,5 @@
 import { OnRpcRequestHandler } from "@metamask/snaps-types";
-import { InitOutput, initializeWasm } from "aleo-snap-wasm";
+import { InitOutput, initializeWasm } from "@chainsafe/aleo-snap-wasm";
 import { getAccount } from "./rpc/getAccount";
 
 enum Methods {
