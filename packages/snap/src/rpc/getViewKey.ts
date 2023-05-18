@@ -1,4 +1,4 @@
-import { ViewKey } from "aleo-snap-wasm";
+import { ViewKey } from "@chainsafe/aleo-snap-wasm";
 import { SnapsGlobalObject } from "@metamask/snaps-types";
 import { getPrivateKey } from "../aleo/account";
 

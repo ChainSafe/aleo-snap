@@ -1,5 +1,5 @@
 {
-  "name": "aleo-snap-wasm",
+  "name": "@chainsafe/aleo-snap-wasm",
   "version": "0.0.1",
   "private": true,
   "scripts": {

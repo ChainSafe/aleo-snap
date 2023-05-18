@@ -12,7 +12,9 @@
   },
   "scripts": {
     "build": "yarn workspaces foreach -vpt run build",
+    "start": "yarn workspaces foreach -vpt run start",
     "lint": "yarn workspaces foreach -vpt run lint",
+    "lint:style:fix": "yarn workspaces foreach -vp run lint:style:fix",
     "test:unit": "yarn workspaces foreach -vpt run test:unit",
     "test:integrations": "yarn workspaces foreach -vpt run test:integrations"
   },

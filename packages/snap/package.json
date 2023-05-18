@@ -47,7 +47,6 @@
     "typescript": "^5.0.3"
   },
   "dependencies": {
-    "@aleohq/wasm": "^0.4.1",
-    "aleo-snap-wasm": "workspace:*"
+    "@chainsafe/aleo-snap-wasm": "workspace:^"
   }
 }

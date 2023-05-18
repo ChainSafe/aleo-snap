@@ -1,5 +1,5 @@
 import { MetaMaskInpageProvider } from "@metamask/providers";
-import { InitInput } from "aleo-snap-wasm";
+import { InitInput } from "@chainsafe/aleo-snap-wasm";
 import { SinonSandbox, SinonStubbedInstance } from "sinon";
 
 declare global {
