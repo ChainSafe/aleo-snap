@@ -37,7 +37,7 @@ and now is ready to be used with snap
 ### Example
 ```typescript
 import { OnRpcRequestHandler } from "@metamask/snaps-types";
-import { initializeWasm, InitOutput, PrivateKey } from "aleo-snap-wasm";
+import { initializeWasm, InitOutput, PrivateKey } from "@chainsafe/aleo-snap-wasm";
 
 let wasm: InitOutput;
 
