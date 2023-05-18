@@ -13,7 +13,6 @@ describe("Test rpc handler function: getAccount", function () {
   const snapStub = mockSnapProvider(sanbox);
 
   before(async function () {
-    // @ts-ignore
     global.wasm = await initializeWasm();
   });
 
