@@ -2446,11 +2446,11 @@ __metadata:
   linkType: hard
 
 "@types/sinon@npm:*, @types/sinon@npm:^10.0.14":
-  version: 10.0.15
-  resolution: "@types/sinon@npm:10.0.15"
+  version: 10.0.14
+  resolution: "@types/sinon@npm:10.0.14"
   dependencies:
     "@types/sinonjs__fake-timers": "*"
-  checksum: 9fbb815cbc4942b11030194c0796025aece0571477fbdf71c1910bf34cafb29ecce837fd561562599be52cf0f563492e5260b0c37ae2f99093b4d1e5dcddbcb1
+  checksum: 1406d31d805e118096b0ee617af232f135c4338542935185cc0954c10e63afff1db6d55ec4c16ba701cbd56aa55fe29798bdcbced3d8d8cee4f283197f110325
   languageName: node
   linkType: hard
 
