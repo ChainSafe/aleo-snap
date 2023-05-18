@@ -1341,17 +1341,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chainsafe/aleo-snap-adapter@workspace:packages/adapter":
-  version: 0.0.0-use.local
-  resolution: "@chainsafe/aleo-snap-adapter@workspace:packages/adapter"
-  dependencies:
-    "@types/eslint": ^8.37.0
-    "@types/node": 18.15.11
-    eslint: ^8.37.0
-    typescript: ^5.0.3
-  languageName: unknown
-  linkType: soft
-
 "@chainsafe/aleo-snap-wasm@workspace:^, @chainsafe/aleo-snap-wasm@workspace:packages/wasm":
   version: 0.0.0-use.local
   resolution: "@chainsafe/aleo-snap-wasm@workspace:packages/wasm"
