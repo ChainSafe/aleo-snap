@@ -1,10 +1,10 @@
 import chai, { expect } from "chai";
 import sinon from "sinon";
 import sinonChai from "sinon-chai";
-import { mockSnapProvider } from "./wallet.stub";
-import { bip44Entropy1Node } from "../aleo/bip44Entropy.mock";
 import { initializeWasm } from "@chainsafe/aleo-snap-wasm";
+import { bip44Entropy1Node } from "../aleo/bip44Entropy.mock";
 import { getViewKey } from "../../../src/rpc/getViewKey";
+import { mockSnapProvider } from "./wallet.stub";
 
 chai.use(sinonChai);
 
@@ -24,10 +24,14 @@ describe("Test rpc handler function: getViewKey", function () {
     snapStub.request
       .withArgs(sinon.match.has("method", "snap_getBip44Entropy"))
       .resolves(bip44Entropy1Node);
+    snapStub.request
+      .withArgs(sinon.match.has("method", "snap_dialog"))
+      .resolves(true);
 
-    const account = await getViewKey(snapStub);
+    const account = await getViewKey(snapStub, "https://fake.com");
 
-    expect(account).to.be.eql("AViewKey1icf4Y5hujfpeLBpxfMSX2V8UGNVJ9pUa4m5SQd1HkWy5");
+    expect(account).to.be.eql(
+      "AViewKey1icf4Y5hujfpeLBpxfMSX2V8UGNVJ9pUa4m5SQd1HkWy5"
+    );
   });
-
 });

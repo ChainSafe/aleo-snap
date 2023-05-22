@@ -13,7 +13,10 @@ enum Methods {
 
 let wasm: InitOutput;
 
-export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
+export const onRpcRequest: OnRpcRequestHandler = async ({
+  request,
+  origin,
+}) => {
   if (!wasm) {
     wasm = await initializeWasm();
   }
@@ -23,7 +26,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
       return getAccount(snap);
     }
     case Methods.GetViewKey: {
-      return getViewKey(snap);
+      return getViewKey(snap, origin);
     }
     default:
       throw new Error("Method not found.");
