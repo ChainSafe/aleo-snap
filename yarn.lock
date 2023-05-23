@@ -1360,13 +1360,16 @@ __metadata:
     "@chainsafe/aleo-snap-wasm": "workspace:^"
     "@metamask/snaps-cli": ^0.32.2
     "@metamask/snaps-types": ^0.32.2
+    "@metamask/snaps-ui": ^0.32.2
     "@types/chai": ^4
+    "@types/chai-as-promised": ^7.1.5
     "@types/eslint": ^8.37.0
     "@types/mocha": ^10.0.1
     "@types/node": 18.15.11
     "@types/sinon": ^10.0.14
     "@types/sinon-chai": ^3.2.9
     chai: ^4.3.7
+    chai-as-promised: ^7.1.1
     eslint: ^8.37.0
     mocha: ^10.2.0
     sinon: ^15.0.4
@@ -2292,6 +2295,15 @@ __metadata:
   dependencies:
     "@types/node": "*"
   checksum: d9186feea87a104c44fc20617c8e8fa5384db03e3a46efea53e80da7d6ece72b847b98992465bec9a1d859d685d80e0d7a8abe8309a3f1fd415847bdc4d77fbe
+  languageName: node
+  linkType: hard
+
+"@types/chai-as-promised@npm:^7.1.5":
+  version: 7.1.5
+  resolution: "@types/chai-as-promised@npm:7.1.5"
+  dependencies:
+    "@types/chai": "*"
+  checksum: 3c8ef2872e55380be045d071a5a7cbe1647578b7e2836c0d38b2e263ffb04e5c361cdd6b1f344b93a1d2044c7eced217e2930eaa36d737fb29912ed928fc6d8b
   languageName: node
   linkType: hard
 
@@ -3322,6 +3334,17 @@ __metadata:
   version: 1.0.30001487
   resolution: "caniuse-lite@npm:1.0.30001487"
   checksum: cd36eaf71fdd35bba5cd9ceab6a96f9b76dbb3f34729dd93219e5211949f8bf615598a9274d3eca32d131711034ea6ae571b05e50bb55509310089b340e0d6a5
+  languageName: node
+  linkType: hard
+
+"chai-as-promised@npm:^7.1.1":
+  version: 7.1.1
+  resolution: "chai-as-promised@npm:7.1.1"
+  dependencies:
+    check-error: ^1.0.2
+  peerDependencies:
+    chai: ">= 2.1.2 < 5"
+  checksum: e25a602c3a8cd0b97ce6b0c7ddaaf4bd8517941da9f44dc65262c5268ea463f634dc495cdef6a21eaeffdb5022b6f4c3781027b8308273b7fff089c605abf6aa
   languageName: node
   linkType: hard
 
