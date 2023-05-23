@@ -20,6 +20,6 @@ export const getViewKey = async (
     },
   });
 
-  if (confirmation) return ViewKey.from_private_key(privateKey).to_string();
-  return "User decline requet";
+  if (!confirmation) throw new Error("User decline request");
+  return ViewKey.from_private_key(privateKey).to_string();
 };
