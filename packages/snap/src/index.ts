@@ -3,7 +3,7 @@ import { InitOutput, initializeWasm } from "@chainsafe/aleo-snap-wasm";
 import { getAccount } from "./rpc/getAccount";
 import { getViewKey } from "./rpc/getViewKey";
 
-enum Methods {
+export enum Methods {
   GetAccount = "aleo_getAccount",
   GetViewKey = "aleo_getViewKey",
   Decrypt = "aleo_decrypt",

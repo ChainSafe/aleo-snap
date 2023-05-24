@@ -13,7 +13,7 @@
     "serve": "mm-snap serve",
     "test": "yarn run test:unit",
     "test:unit": "mocha --colors -r ts-node/register \"test/unit/**/*.test.ts\"",
-    "test:integrations": "echo"
+    "test:integrations": "mocha --colors -r ts-node/register \"test/integration/**/*.test.ts\""
   },
   "repository": {
     "type": "git",
@@ -30,6 +30,7 @@
   "author": "ChainSafe <info@chainsafe.io>",
   "homepage": "https://github.com/chainsafe/aleo-snap#readme",
   "devDependencies": {
+    "@chainsafe/dappeteer": "^5.1.1",
     "@metamask/snaps-cli": "^0.32.2",
     "@metamask/snaps-types": "^0.32.2",
     "@types/chai": "^4",
@@ -43,6 +44,7 @@
     "chai-as-promised": "^7.1.1",
     "eslint": "^8.37.0",
     "mocha": "^10.2.0",
+    "playwright": "^1.34.1",
     "sinon": "^15.0.4",
     "sinon-chai": "^3.7.0",
     "ts-node": "^10.9.1",
