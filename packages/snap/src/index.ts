@@ -6,7 +6,7 @@ import { getViewKey } from "./rpc/getViewKey";
 import { decryptRecord } from "./rpc/decryptRecord";
 import { decryptRecordSchema } from "./utils/params";
 
-enum Methods {
+export enum Methods {
   GetAccount = "aleo_getAccount",
   GetViewKey = "aleo_getViewKey",
   DecryptRecord = "aleo_decryptRecord",
@@ -16,7 +16,10 @@ enum Methods {
 
 let wasm: InitOutput;
 
-export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
+export const onRpcRequest: OnRpcRequestHandler = async ({
+  request,
+  origin,
+}) => {
   if (!wasm) {
     wasm = await initializeWasm();
   }
@@ -26,7 +29,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
       return getAccount(snap);
     }
     case Methods.GetViewKey: {
-      return getViewKey(snap);
+      return getViewKey(snap, origin);
     }
     case Methods.DecryptRecord: {
       assert(request.params, decryptRecordSchema);
