@@ -3,6 +3,7 @@ node_modules
 .idea
 .vscode
 dist
+lib
 
 # Non zero install strategy
 .pnp.*

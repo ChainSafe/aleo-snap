@@ -1,6 +1,6 @@
 import { Buffer } from "buffer";
 import { SnapsGlobalObject } from "@metamask/snaps-types";
-import { PrivateKey } from "aleo-snap-wasm";
+import { PrivateKey } from "@chainsafe/aleo-snap-wasm";
 
 export const getPrivateKey = async (
   snap: SnapsGlobalObject

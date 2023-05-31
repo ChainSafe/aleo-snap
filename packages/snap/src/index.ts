@@ -1,5 +1,5 @@
 import { OnRpcRequestHandler } from "@metamask/snaps-types";
-import { InitOutput, initializeWasm } from "aleo-snap-wasm";
+import { InitOutput, initializeWasm } from "@chainsafe/aleo-snap-wasm";
 import { assert } from "superstruct";
 import { getAccount } from "./rpc/getAccount";
 import { getViewKey } from "./rpc/getViewKey";
@@ -10,7 +10,7 @@ import { sign } from "./rpc/sign";
 enum Methods {
   GetAccount = "aleo_getAccount",
   GetViewKey = "aleo_getViewKey",
-  DecryptRecord = "aleo_decrypt",
+  DecryptRecord = "aleo_decryptRecord",
   Sign = "aleo_sign",
   Verify = "aleo_verify",
 }
@@ -20,8 +20,6 @@ let wasm: InitOutput;
 export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
   if (!wasm) {
     wasm = await initializeWasm();
-  } else {
-    console.log("initialized wasm");
   }
 
   switch (request.method) {

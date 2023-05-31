@@ -1,5 +1,5 @@
 import { Buffer } from "buffer";
-import { Signature } from "aleo-snap-wasm";
+import { Signature } from "@chainsafe/aleo-snap-wasm";
 import { SnapsGlobalObject } from "@metamask/snaps-types";
 import { panel, text, heading } from "@metamask/snaps-ui";
 import { getPrivateKey } from "../aleo/account";
@@ -18,9 +18,8 @@ export const sign = async (
       content: panel([heading("Confirm signing this message?"), text(message)]),
     },
   });
-  console.log(confirmation)
+
   if (!confirmation) throw Error("Transaction not confirmed");
-  if (confirmation !== true) throw Error("Transaction not confirmed"); 
-  
+
   return privateKey.sign(messageUint8);
 };

@@ -1,7 +1,7 @@
 import chai, { expect } from "chai";
 import sinon from "sinon";
 import sinonChai from "sinon-chai";
-import { initializeWasm } from "aleo-snap-wasm";
+import { initializeWasm } from "@chainsafe/aleo-snap-wasm";
 import { decryptRecord } from "../../../src/rpc/decryptRecord";
 import { mockSnapProvider } from "./wallet.stub";
 import { bip44Entropy1Node } from "../aleo/bip44Entropy.mock";
@@ -13,7 +13,6 @@ describe("Test rpc handler function: decryptRecord", function () {
   const snapStub = mockSnapProvider(sanbox);
 
   before(async function () {
-    // @ts-ignore
     global.wasm = await initializeWasm();
   });
 

@@ -9,6 +9,7 @@ export const decryptRecordSchema: Describe<DecryptRecordParams> = object({
   viewKey: optional(string()),
   cipherText: string(),
 });
+
 export interface SignParams {
   message: string;
 }

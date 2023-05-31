@@ -3,7 +3,7 @@ import sinon from "sinon";
 import sinonChai from "sinon-chai";
 import { mockSnapProvider } from "./wallet.stub";
 import { bip44Entropy1Node } from "../aleo/bip44Entropy.mock";
-import { initializeWasm } from "aleo-snap-wasm";
+import { initializeWasm } from "@chainsafe/aleo-snap-wasm";
 import { getViewKey } from "../../../src/rpc/getViewKey";
 
 chai.use(sinonChai);
@@ -13,7 +13,6 @@ describe("Test rpc handler function: getViewKey", function () {
   const snapStub = mockSnapProvider(sanbox);
 
   before(async function () {
-    // @ts-ignore
     global.wasm = await initializeWasm();
   });
 
