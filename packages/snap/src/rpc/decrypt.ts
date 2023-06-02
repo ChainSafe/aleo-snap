@@ -1,11 +1,11 @@
 import { ViewKey } from "@chainsafe/aleo-snap-wasm";
 import { SnapsGlobalObject } from "@metamask/snaps-types";
-import { DecryptRecordParams } from "../utils/params";
+import { DecryptParams } from "../utils/params";
 import { getPrivateKey } from "../aleo/account";
 
-export const decryptRecord = async (
+export const decrypt = async (
   snap: SnapsGlobalObject,
-  params: DecryptRecordParams
+  params: DecryptParams
 ): Promise<string> => {
   const privateKey = await getPrivateKey(snap);
 
