@@ -7,12 +7,10 @@ export const decrypt = async (
   snap: SnapsGlobalObject,
   params: DecryptParams
 ): Promise<string> => {
-  const privateKey = await getPrivateKey(snap);
-
   if (params.viewKey)
     return ViewKey.from_string(params.viewKey).decrypt(params.cipherText);
-  else {
-    const userViewKey = ViewKey.from_private_key(privateKey).to_string();
-    return ViewKey.from_string(userViewKey).decrypt(params.cipherText);
-  }
+
+  const privateKey = await getPrivateKey(snap);
+  const userViewKey = ViewKey.from_private_key(privateKey).to_string();
+  return ViewKey.from_string(userViewKey).decrypt(params.cipherText);
 };
