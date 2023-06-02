@@ -8,8 +8,11 @@ export const decryptRecord = async (
   params: DecryptRecordParams
 ): Promise<string> => {
   const privateKey = await getPrivateKey(snap);
-  const userViewKey = ViewKey.from_private_key(privateKey).to_string();
+
   if (params.viewKey)
     return ViewKey.from_string(params.viewKey).decrypt(params.cipherText);
-  return ViewKey.from_string(userViewKey).decrypt(params.cipherText);
+  else {
+    const userViewKey = ViewKey.from_private_key(privateKey).to_string();
+    return ViewKey.from_string(userViewKey).decrypt(params.cipherText);
+  }
 };

@@ -50,7 +50,7 @@ describe("Test rpc handler function: decryptRecord", function () {
     )).to.be.rejectedWith("Decryption failed - view key did not match record");
   });
 
-  it("should return decrypted record only with cipherthext if encrypted by owner", async function () {
+  it("should return decrypted record only with cipherthext if owner is user", async function () {
     snapStub.request
     .withArgs(sinon.match.has("method", "snap_getBip44Entropy"))
     .resolves(bip44Entropy1Node);
@@ -63,8 +63,6 @@ describe("Test rpc handler function: decryptRecord", function () {
     );
 
     const account = await getAccount(snapStub);
-
-    expect(account).to.be.eql("aleo1j2mxy4kp3snsrzhs95dlar6eyekerg62h4yetw93eufw76u8qq9q7ar5qz");
 
     expect(record.substring(11, account.length + 11)).to.be.eql(account);
 

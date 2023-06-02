@@ -9,7 +9,7 @@ import { decryptRecordSchema } from "./utils/params";
 export enum Methods {
   GetAccount = "aleo_getAccount",
   GetViewKey = "aleo_getViewKey",
-  DecryptRecord = "aleo_decryptRecord",
+  DecryptRecord = "aleo_decrypt",
   Sign = "aleo_sign",
   Verify = "aleo_verify",
 }
