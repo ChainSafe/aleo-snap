@@ -47,6 +47,8 @@ jobs:
       - run: corepack enable
       - name: Install deps
         run: yarn --immutable
+      - name: Build
+        run: yarn build
       - name: Lint
         run: yarn run lint
 
@@ -63,6 +65,8 @@ jobs:
       - run: corepack enable
       - name: Install
         run: yarn --immutable
+      - name: Build
+        run: yarn build
       - name: "Unit Tests"
         run: 'yarn run test:unit'
       - name: "Integrations Tests"
