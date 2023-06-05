@@ -40,6 +40,10 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
       assert(request.params, signSchema);
       return sign(snap, request.params.message);
     }
+    case Methods.Decrypt: {
+      assert(request.params, decryptSchema);
+      return decrypt(snap, request.params);
+    }
     default:
       throw new Error("Method not found.");
   }
