@@ -5,5 +5,6 @@ export const assert: typeof assertSuperstruct = (value, struct, message) => {
     assertSuperstruct(value, struct, message);
   } catch (e) {
     if (e instanceof Error) throw new Error(e.message);
+    throw new Error("Unexpected error");
   }
 };

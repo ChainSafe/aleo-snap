@@ -38,7 +38,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
     }
     case Methods.Sign: {
       assert(request.params, signSchema);
-      return sign(snap, request.params.message);
+      return sign(snap, origin, request.params.message);
     }
     default:
       throw new Error("Method not found.");

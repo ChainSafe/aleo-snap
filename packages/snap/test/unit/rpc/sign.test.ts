@@ -33,6 +33,7 @@ describe("Test rpc handler function: sign", function () {
 
     const signResponse = await sign(
       snapStub,
+      "https://fake.com",
       "Hello world!"
     );
 
@@ -47,6 +48,7 @@ describe("Test rpc handler function: sign", function () {
     await expect(
       sign(
         snapStub,
+        "https://fake.com",
         "Hello world!"
       )
     ).to.rejectedWith("Transaction not confirmed");
