@@ -1358,12 +1358,12 @@ __metadata:
   resolution: "@chainsafe/aleo-snap@workspace:packages/snap"
   dependencies:
     "@chainsafe/aleo-snap-wasm": "workspace:^"
-    "@chainsafe/dappeteer": ^5.1.1
+    "@chainsafe/dappeteer": ^5.2
     "@metamask/snaps-cli": ^0.32.2
     "@metamask/snaps-types": ^0.32.2
     "@metamask/snaps-ui": ^0.32.2
     "@types/chai": ^4
-    "@types/chai-as-promised": ^7.1.5
+    "@types/chai-as-promised": ^7
     "@types/eslint": ^8.37.0
     "@types/mocha": ^10.0.1
     "@types/node": 18.15.11
@@ -1389,9 +1389,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chainsafe/dappeteer@npm:^5.1.1":
-  version: 5.1.1
-  resolution: "@chainsafe/dappeteer@npm:5.1.1"
+"@chainsafe/dappeteer@npm:^5.2":
+  version: 5.2.0
+  resolution: "@chainsafe/dappeteer@npm:5.2.0"
   dependencies:
     "@metamask/providers": ^9.1.0
     fs-extra: ^11.1.0
@@ -1408,7 +1408,7 @@ __metadata:
       optional: true
   bin:
     mmd: ./bin/metamask_downloader.js
-  checksum: becbf66018a37b0c7d0ff40c9593abb0350f89cfdc5e4ab6502f8bd5fdedcbe7cde0d174a63e1e2f6042d9ecbd613d1464a689e94a5db08851cccb630aa8c5d5
+  checksum: e83b2e90d8027b0fddc06063098df4928f2f30249040d4306ba1b43598a231fe247622195101d85db5246e72582f643a449c32213c2242f8e0c940f61bf9845c
   languageName: node
   linkType: hard
 
@@ -2344,7 +2344,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/chai-as-promised@npm:^7.1.5":
+"@types/chai-as-promised@npm:^7":
   version: 7.1.5
   resolution: "@types/chai-as-promised@npm:7.1.5"
   dependencies:
