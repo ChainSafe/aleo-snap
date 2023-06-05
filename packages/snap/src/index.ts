@@ -1,6 +1,6 @@
 import { OnRpcRequestHandler } from "@metamask/snaps-types";
 import { InitOutput, initializeWasm } from "@chainsafe/aleo-snap-wasm";
-import { assert } from "superstruct";
+import { assert } from "./utils/assert";
 import { getAccount } from "./rpc/getAccount";
 import { getViewKey } from "./rpc/getViewKey";
 import { decryptSchema, signSchema, verifySchema } from "./utils/params";
@@ -39,7 +39,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
     }
     case Methods.Sign: {
       assert(request.params, signSchema);
-      return sign(snap, request.params.message);
+      return sign(snap, origin, request.params.message);
     }
     case Methods.Verify: {
       assert(request.params, verifySchema);
