@@ -1,24 +1,69 @@
-name: 'ci / test'
+name: ci
+# This workflow is triggered on pushes to the repository.
 on:
   push:
     branches:
-      - main # runs on push to master, add more branches if you use them
+      - main
   pull_request:
     branches:
-      - '**' # runs on update to pull request on any branch
+      - '**'
+
 jobs:
-  # most basic test job
-  test:
+  build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          cache: 'yarn' # cache node modules
-          node-version: 18
+          cache: yarn
+          node-version: '18'
       - run: corepack enable
-      - run: yarn install --immutable # install dependencies
-      - run: yarn run build # compile typescript into javascript
-      - run: yarn run lint # lint code
-      - run: yarn run test:unit # run unit tests
-      - run: yarn run test:integrations # run integration tests
+      - name: Install deps
+        run: yarn --immutable
+      - name: Build
+        run: yarn build
+      - uses: tj-actions/verify-changed-files@v9
+        id: verify-changed-files
+        with:
+          files: |
+            packages/snap/snap.manifest.json
+      - name: Check if snap manifest updated
+        if: steps.verify-changed-files.outputs.files_changed == 'true'
+        run: |
+          echo "Snap manifest not updated: ${{ steps.verify-changed-files.outputs.changed_files }}"
+          exit 1
+
+  lint:
+    needs: build
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: 'yarn'
+      - run: corepack enable
+      - name: Install deps
+        run: yarn --immutable
+      - name: Lint
+        run: yarn run lint
+
+  tests:
+    needs: lint
+    name: Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: 'yarn'
+      - run: corepack enable
+      - name: Install
+        run: yarn --immutable
+      - name: "Unit Tests"
+        run: 'yarn run test:unit'
+      - name: "Integrations Tests"
+        run: 'yarn run test:integrations --timeout 50000'
