@@ -17,3 +17,13 @@ export interface SignParams {
 export const signSchema: Describe<SignParams> = object({
   message: string(),
 });
+
+export interface VerifyParams {
+  message: string;
+  signature: string;
+}
+
+export const verifySchema: Describe<VerifyParams> = object({
+  message: string(),
+  signature: string(),
+});
