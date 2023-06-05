@@ -3,14 +3,14 @@ import { InitOutput, initializeWasm } from "@chainsafe/aleo-snap-wasm";
 import { assert } from "superstruct";
 import { getAccount } from "./rpc/getAccount";
 import { getViewKey } from "./rpc/getViewKey";
-import { decryptRecord } from "./rpc/decryptRecord";
-import { decryptRecordSchema, signSchema } from "./utils/params";
+import { decryptSchema, signSchema } from "./utils/params";
 import { sign } from "./rpc/sign";
+import { decrypt } from "./rpc/decrypt";
 
 export enum Methods {
   GetAccount = "aleo_getAccount",
   GetViewKey = "aleo_getViewKey",
-  DecryptRecord = "aleo_decryptRecord",
+  Decrypt = "aleo_decrypt",
   Sign = "aleo_sign",
   Verify = "aleo_verify",
 }
@@ -32,9 +32,9 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
     case Methods.GetViewKey: {
       return await getViewKey(snap, origin);
     }
-    case Methods.DecryptRecord: {
-      assert(request.params, decryptRecordSchema);
-      return decryptRecord(snap, request.params);
+    case Methods.Decrypt: {
+      assert(request.params, decryptSchema);
+      return decrypt(snap, request.params);
     }
     case Methods.Sign: {
       assert(request.params, signSchema);
