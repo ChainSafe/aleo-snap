@@ -78,4 +78,47 @@ describe("Integration tests", function () {
       await expectPromise;
     });
   });
+
+  describe("decrypt", function () {
+    it("successfully decrypt", async function () {
+      const invokeAction = await metaMask.snaps.invokeSnap(
+        testPage,
+        snapId,
+        Methods.Decrypt,
+        {
+          cipherText: "record1qyqspcvr3q75x5klxaa88ysjcpx36gz0zalsx7hjn5mtttqndcffxmgzqyxx66trwfhkxun9v35hguerqqpqzq83z5d5jpqwwhdglt05lnaq83dnnkfukg2upfwzywx849s5mkklqssure3s6926z2us892c84dqjm8qarn64z0pcqqw2l3t29jen4cs6c0qfnm",
+        }
+      );
+
+      expect(invokeAction).to.equal(
+        "{\n  owner: aleo1j2mxy4kp3snsrzhs95dlar6eyekerg62h4yetw93eufw76u8qq9q7ar5qz.private,\n  microcredits: 50000000u64.private,\n  _nonce: 6080806725905813185393881582373108458266388201126403542594037621192938406177group.public\n}"
+      );
+    });
+  });
+
+  describe("sign", function () {
+    it("successfully sign", async function () {
+      const invokeAction = metaMask.snaps.invokeSnap(
+        testPage,
+        snapId,
+        Methods.Sign,
+        { message: "Hello world!" }
+      );
+
+      await metaMask.snaps.dialog.accept();
+
+      expect(await invokeAction).to.deep.eq(
+        { ptr: 1237968 }
+      );
+    });
+
+    it("fail sign on user decline", async function () {
+      const expectPromise = expect(
+        metaMask.snaps.invokeSnap(testPage, snapId, Methods.Sign, { message: "Hello world!" })
+      ).to.be.rejectedWith("Transaction not confirmed");
+
+      await metaMask.snaps.dialog.reject();
+      await expectPromise;
+    });
+  });
 });
