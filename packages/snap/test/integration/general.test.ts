@@ -121,4 +121,20 @@ describe("Integration tests", function () {
       await expectPromise;
     });
   });
+
+  describe("verify", function () {
+    it("verify signature", async function () {
+      const invokeAction = metaMask.snaps.invokeSnap(
+        testPage,
+        snapId,
+        Methods.Verify,
+        { 
+          message: "Message to verify",  
+          signature: "sign1l4tgm3pdmrqxx9gtz3etp0x9crg6lvtk00980egxdlln7te9qqqnfj7g6zft0ma6f9suj3trwaydhhqt4mhd7zmpxz3ap7jhmnaa6q4g73h4v52d44n48d96eljqhtd2608f3su43qsz40wjelvpwfrwqdxyl7qkskdmghqr6etfu68jshkrlvt5z6hsujg53l927azv5qyssnmcsw9"
+        }
+      );
+
+      expect(await invokeAction).to.be.true;
+    });
+  });
 });

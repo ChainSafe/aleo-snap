@@ -3,9 +3,10 @@ import { InitOutput, initializeWasm } from "@chainsafe/aleo-snap-wasm";
 import { assert } from "./utils/assert";
 import { getAccount } from "./rpc/getAccount";
 import { getViewKey } from "./rpc/getViewKey";
-import { decryptSchema, signSchema } from "./utils/params";
+import { decryptSchema, signSchema, verifySchema } from "./utils/params";
 import { sign } from "./rpc/sign";
 import { decrypt } from "./rpc/decrypt";
+import { verify } from "./rpc/verify";
 
 export enum Methods {
   GetAccount = "aleo_getAccount",
@@ -39,6 +40,10 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
     case Methods.Sign: {
       assert(request.params, signSchema);
       return sign(snap, origin, request.params.message);
+    }
+    case Methods.Verify: {
+      assert(request.params, verifySchema);
+      return verify(snap, request.params);
     }
     default:
       throw new Error("Method not found.");
