@@ -1,5 +1,5 @@
 {
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "The Aleo snap.",
   "proposedName": "Aleo snap",
   "repository": {
@@ -7,7 +7,7 @@
     "url": "git+https://github.com/chainsafe/aleo-snap.git"
   },
   "source": {
-    "shasum": "km5SD+9NSeYoSyMSTmt3hl0ELPuHkojX75akmNC62QI=",
+    "shasum": "W2mgFP8dCQEfg0o+M2e/NBaVSqJT0vBSbD+wU9l1uQs=",
     "location": {
       "npm": {
         "filePath": "./dist/bundle.js",
