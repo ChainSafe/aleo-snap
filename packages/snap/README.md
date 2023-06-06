@@ -39,13 +39,24 @@ yarn start
 ### Initialize Snap
 
 Open a browser with any website (e.g., http://example.com/), with the Developer Tools open.  
-Run this command in the console to initialize the Snap:
+Run this command in the console to initialize the Snap from local source:
 
 ```javascript
 window.ethereum.request({
   method: "wallet_requestSnaps",
   params: {
     "local:http://localhost:8081": {},
+  },
+});
+```
+
+or initialize from npm:  
+
+```javascript
+window.ethereum.request({
+  method: "wallet_requestSnaps",
+  params: {
+    "npm:@chainsafe/aleo-snap": {},
   },
 });
 ```
