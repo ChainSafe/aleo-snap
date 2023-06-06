@@ -1,7 +1,7 @@
 {
   "name": "@chainsafe/aleo-snap",
   "version": "1.0.1",
-  "main": "index.js",
+  "main": "build/index.js",
   "license": "MIT",
   "scripts": {
     "build": "yarn run build:snap",
