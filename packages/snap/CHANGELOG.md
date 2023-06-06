@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/ChainSafe/aleo-snap/compare/aleo-snap-v1.0.0...aleo-snap-v1.0.1) (2023-06-06)
+
+
+### Bug Fixes
+
+* snap doc ([#19](https://github.com/ChainSafe/aleo-snap/issues/19)) ([f345e0d](https://github.com/ChainSafe/aleo-snap/commit/f345e0d204c336dd196b274c370981bf26675e1b))
+
 ## [1.0.0](https://github.com/ChainSafe/aleo-snap/compare/aleo-snap-v1.0.0...aleo-snap-v1.0.0) (2023-06-06)
 
 
