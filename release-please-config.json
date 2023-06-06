@@ -2,6 +2,7 @@
     "plugins": [],
     "packages": {
       "packages/snap": {
+        "release-as": "1.0.0",
         "releaseType": "node",
         "draft": false,
         "prerelease": false,
