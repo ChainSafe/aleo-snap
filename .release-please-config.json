@@ -1,0 +1,21 @@
+{
+    "plugins": [],
+    "packages": {
+      "packages/snap": {
+        "releaseType": "node",
+        "draft": false,
+        "prerelease": false,
+        "bumpMinorPreMajor": false,
+        "bumpPatchForMinorPreMajor": false,
+        "changelogPath": "CHANGELOG.md",
+        "versioning": "default",
+        "extra-files": [
+          {
+            "type": "json",
+            "path": "snap.manifest.json",
+            "jsonpath": "$.version"
+          }
+        ]
+      }
+    }
+  }
