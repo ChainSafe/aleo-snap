@@ -19,10 +19,10 @@ jobs:
           release-type: node
           monorepo-tags: true
           changelog-types: '[{"type":"feat","section":"Features","hidden":false},{"type":"fix","section":"Bug Fixes","hidden":false},{"type":"chore","section":"Miscellaneous","hidden":false},{"type":"revert","hidden":true}]'
-      
+
       - uses: actions/checkout@v3
         if: ${{ steps.release.outputs.releases_created }}
-        
+
       - uses: actions/setup-node@v3
         with:
           cache: 'yarn'
@@ -35,7 +35,7 @@ jobs:
 
       - run: yarn install --immutable
         if: ${{ steps.release.outputs.releases_created }}
-      
+
       - run: yarn build
         if: ${{ steps.release.outputs.releases_created }}
 
