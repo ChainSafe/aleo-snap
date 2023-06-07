@@ -1,0 +1,22 @@
+name: CFG
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - '**'
+jobs:
+  yarn:
+    name: yarn
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          cache: 'yarn'
+          node-version: 18
+          registry-url: 'https://registry.npmjs.org'
+      - run: corepack enable
+
+      - run: yarn config
