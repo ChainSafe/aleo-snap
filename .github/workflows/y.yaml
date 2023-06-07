@@ -20,3 +20,5 @@ jobs:
       - run: corepack enable
 
       - run: yarn config
+
+      - run: yarn -v
