@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.5](https://github.com/ChainSafe/aleo-snap/compare/aleo-snap-v1.0.4...aleo-snap-v1.0.5) (2023-06-07)
+
+
+### Bug Fixes
+
+* missing `description` in `package.json` ([#29](https://github.com/ChainSafe/aleo-snap/issues/29)) ([6d879b8](https://github.com/ChainSafe/aleo-snap/commit/6d879b87f1b68bc43762572ceed16cf708769fee))
+
 ## [1.0.4](https://github.com/ChainSafe/aleo-snap/compare/aleo-snap-v1.0.3...aleo-snap-v1.0.4) (2023-06-07)
 
 
