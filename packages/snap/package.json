@@ -1,5 +1,6 @@
 {
   "name": "@chainsafe/aleo-snap",
+  "description": "Aleo Snap, using MetaMask Snap's architecture, enables secure and efficient interactions with the Aleo Wallet.",
   "version": "1.0.4",
   "main": "dist/bundle.js",
   "license": "MIT",
