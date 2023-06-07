@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.4](https://github.com/ChainSafe/aleo-snap/compare/aleo-snap-v1.0.3...aleo-snap-v1.0.4) (2023-06-07)
+
+
+### Bug Fixes
+
+* npm package size ([#26](https://github.com/ChainSafe/aleo-snap/issues/26)) ([3deb2c4](https://github.com/ChainSafe/aleo-snap/commit/3deb2c44c9ffac6373c920460a99802ad5da5b39))
+
 ## [1.0.3](https://github.com/ChainSafe/aleo-snap/compare/aleo-snap-v1.0.2...aleo-snap-v1.0.3) (2023-06-06)
 
 
