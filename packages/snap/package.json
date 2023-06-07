@@ -1,7 +1,7 @@
 {
   "name": "@chainsafe/aleo-snap",
   "version": "1.0.3",
-  "main": "build/index.js",
+  "main": "dist/bundle.js",
   "license": "MIT",
   "scripts": {
     "build": "yarn run build:snap",
@@ -19,6 +19,10 @@
     "type": "git",
     "url": "git+https://github.com/chainsafe/aleo-snap.git"
   },
+  "files": [
+    "snap.manifest.json",
+    "CHANGELOG.md"
+  ],
   "keywords": [
     "aleo",
     "metamask",
