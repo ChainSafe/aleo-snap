@@ -2998,6 +2998,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/prettier@npm:^2":
+  version: 2.7.3
+  resolution: "@types/prettier@npm:2.7.3"
+  checksum: 0960b5c1115bb25e979009d0b44c42cf3d792accf24085e4bfce15aef5794ea042e04e70c2139a2c3387f781f18c89b5706f000ddb089e9a4a2ccb7536a2c5f0
+  languageName: node
+  linkType: hard
+
 "@types/prop-types@npm:*":
   version: 15.7.5
   resolution: "@types/prop-types@npm:15.7.5"
@@ -5417,6 +5424,8 @@ __metadata:
   resolution: "example@workspace:packages/example"
   dependencies:
     "@ant-design/icons": ^5
+    "@chainsafe/eslint-config": ^1.1.0
+    "@types/prettier": ^2
     "@types/react": ^18.0.37
     "@types/react-dom": ^18.0.11
     "@typescript-eslint/eslint-plugin": ^5.59.0
@@ -5426,6 +5435,7 @@ __metadata:
     eslint: ^8.38.0
     eslint-plugin-react-hooks: ^4.6.0
     eslint-plugin-react-refresh: ^0.3.4
+    prettier: ^2.8.8
     react: ^18.2.0
     react-countup: ^6.4.2
     react-dom: ^18.2.0
@@ -7518,7 +7528,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.7.1":
+"prettier@npm:^2.7.1, prettier@npm:^2.8.8":
   version: 2.8.8
   resolution: "prettier@npm:2.8.8"
   bin:
