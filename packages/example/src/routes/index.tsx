@@ -2,6 +2,7 @@ import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { App } from '../App';
 import {Account, Root} from './root';
 import ErrorPage from './ErrorPage';
+import {Transfer} from "./root/Transfer.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ export const router = createBrowserRouter([
           {
             path: '/account',
             element: <Account />,
+          },
+          {
+            path: '/transfer',
+            element: <Transfer />,
           },
         ],
       },
