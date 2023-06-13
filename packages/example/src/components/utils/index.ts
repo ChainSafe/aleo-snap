@@ -1,2 +1,2 @@
-export { CopyButton } from "./CopyButton";
-export { formLayout } from "./layout";
+export { CopyButton } from './CopyButton';
+export { formLayout } from './layout';

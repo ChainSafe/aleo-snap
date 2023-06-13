@@ -1,2 +1,2 @@
-export { Root } from "./Root"
-export {Account} from "./Account";
+export { Root } from './Root';
+export { Account } from './Account';

@@ -1,45 +1,70 @@
-import {Button, Card, Divider, Form, Input, Row, Col, Statistic} from "antd";
-import {CopyButton, formLayout} from "../utils";
+import { Button, Card, Divider, Form, Input, Row, Col, Statistic } from 'antd';
 import CountUp from 'react-countup';
-import {valueType} from "antd/es/statistic/utils";
+import { valueType } from 'antd/es/statistic/utils';
+import { CopyButton, formLayout } from '../utils';
 
-const formatter = (value: valueType): JSX.Element => <CountUp end={Number(value)} separator="," />;
+const formatter = (value: valueType): JSX.Element => (
+  <CountUp end={Number(value)} separator="," />
+);
 
 export function AccountInfo(): JSX.Element {
-
-  return <Card title="Account Info" style={{width: "100%", borderRadius: "20px"}}
-               bordered={false}>
-    <Row gutter={16}>
-      <Col span={6}>
-        <Statistic title="Balance" value={112893} formatter={formatter} />
-      </Col>
-      <Col span={6}>
-        <Statistic title="Current Block" value={112893} precision={2} formatter={formatter} />
-      </Col>
-      <Col span={6}>
-        <Statistic title="Latest Block" value={112893} precision={2} formatter={formatter} />
-      </Col>
-      <Col span={6}>
-        <Statistic title="Status" value={"syncing"} />
-      </Col>
-    </Row>
-    <Divider/>
+  return (
+    <Card
+      title="Account Info"
+      style={{ width: '100%', borderRadius: '20px' }}
+      bordered={false}
+    >
+      <Row gutter={16}>
+        <Col span={6}>
+          <Statistic title="Balance" value={112893} formatter={formatter} />
+        </Col>
+        <Col span={6}>
+          <Statistic
+            title="Current Block"
+            value={112893}
+            precision={2}
+            formatter={formatter}
+          />
+        </Col>
+        <Col span={6}>
+          <Statistic
+            title="Latest Block"
+            value={112893}
+            precision={2}
+            formatter={formatter}
+          />
+        </Col>
+        <Col span={6}>
+          <Statistic title="Status" value={'syncing'} />
+        </Col>
+      </Row>
+      <Divider />
       <Form {...formLayout}>
         <Form.Item label="Address" colon={false}>
-          <Input size="large" placeholder="Signature" value={"addr"}
-                 addonAfter={<CopyButton data={"signature"}/>} disabled/>
+          <Input
+            size="large"
+            placeholder="Signature"
+            value={'addr'}
+            addonAfter={<CopyButton data={'signature'} />}
+            disabled
+          />
         </Form.Item>
         <Form.Item label="View Key" colon={false} style={{ marginBottom: 0 }}>
           <Form.Item
             name="wk"
             style={{ display: 'inline-block', width: 'calc(100% - 88px)' }}
           >
-            <Input size="large" placeholder="Signature" value={"pkaaaa"}
-                   addonAfter={<CopyButton data={"signature"}/>} disabled/>
+            <Input
+              size="large"
+              placeholder="Signature"
+              value={'pkaaaa'}
+              addonAfter={<CopyButton data={'signature'} />}
+              disabled
+            />
           </Form.Item>
           <Form.Item
             name="wkb"
-            style={{ display: 'inline-block', width: "80px", margin: '0 0 0 8px' }}
+            style={{ display: 'inline-block', width: '80px', margin: '0 0 0 8px' }}
           >
             <Button size="large" style={{ width: 80 }} onClick={() => {}}>
               Show
@@ -51,12 +76,17 @@ export function AccountInfo(): JSX.Element {
             name="pk"
             style={{ display: 'inline-block', width: 'calc(100% - 88px)' }}
           >
-            <Input size="large" placeholder="Signature" value={"pkaaaa"}
-                   addonAfter={<CopyButton data={"signature"}/>} disabled/>
+            <Input
+              size="large"
+              placeholder="Signature"
+              value={'pkaaaa'}
+              addonAfter={<CopyButton data={'signature'} />}
+              disabled
+            />
           </Form.Item>
           <Form.Item
             name="pkw"
-            style={{ display: 'inline-block', width: "80px", margin: '0 0 0 8px' }}
+            style={{ display: 'inline-block', width: '80px', margin: '0 0 0 8px' }}
           >
             <Button size="large" style={{ width: 80 }} onClick={() => {}}>
               Show
@@ -64,5 +94,6 @@ export function AccountInfo(): JSX.Element {
           </Form.Item>
         </Form.Item>
       </Form>
-  </Card>
+    </Card>
+  );
 }

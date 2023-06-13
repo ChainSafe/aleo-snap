@@ -1,1 +1,1 @@
-export { TransferFunds } from "./TransferFunds";
+export { TransferFunds } from './TransferFunds';

@@ -5,7 +5,7 @@
 }
 
 .logo:before {
-  content: "Aleo Snap";
+  content: 'Aleo Snap';
   color: white;
   font-size: 20px;
   font-weight: bold;
@@ -16,6 +16,6 @@
  *
  * https://www.w3schools.com/cssref/pr_class_cursor.asp
  */
-input[type="text"]:disabled {
+input[type='text']:disabled {
   cursor: text;
 }

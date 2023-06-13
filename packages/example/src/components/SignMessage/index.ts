@@ -1,1 +1,1 @@
-export { SignMessage } from "./SignMessage";
+export { SignMessage } from './SignMessage';

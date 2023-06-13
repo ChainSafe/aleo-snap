@@ -1,1 +1,1 @@
-export { VerifyMessage} from "./VerifyMessage";
+export { VerifyMessage } from './VerifyMessage';

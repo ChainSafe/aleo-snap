@@ -1,14 +1,12 @@
-import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 export function Root(): JSX.Element {
-  const location = useLocation();
+  // const location = useLocation();
 
-  if (!true) {
-    return <h1>Fail</h1>
+  /*if (false) {
+    return <h1>Fail</h1>;
     // return <Navigate to="/connect" replace={true} />;
-  }
+  }*/
 
-  return (
-      <Outlet />
-  );
+  return <Outlet />;
 }

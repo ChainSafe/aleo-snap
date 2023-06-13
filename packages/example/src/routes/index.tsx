@@ -1,8 +1,8 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { App } from '../App';
-import {Account, Root} from './root';
+import { Account, Root } from './root';
 import ErrorPage from './ErrorPage';
-import {Transfer} from "./root/Transfer.tsx";
+import { Transfer } from './root/Transfer.tsx';
 
 export const router = createBrowserRouter([
   {
