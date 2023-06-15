@@ -1,0 +1,21 @@
+.logo {
+  float: left;
+  width: 125px;
+  height: 31px;
+}
+
+.logo:before {
+  content: 'Aleo Snap';
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/*
+ * Input (disabled) - Make box appear not disabled
+ *
+ * https://www.w3schools.com/cssref/pr_class_cursor.asp
+ */
+input[type='text']:disabled {
+  cursor: text;
+}

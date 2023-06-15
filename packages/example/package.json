@@ -1,0 +1,41 @@
+{
+  "name": "example",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "lint": "yarn run lint:style && yarn run lint:types",
+    "lint:fix": "yarn run lint:fix:style && yarn run lint:fix:code",
+    "lint:style": "eslint --color --ext .ts,.tsx src/",
+    "lint:types": "tsc --noEmit --pretty",
+    "lint:fix:style": "prettier --loglevel warn --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\"",
+    "lint:fix:code": "yarn run lint:style --fix"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5",
+    "antd": "^5",
+    "copy-to-clipboard": "^3.3.3",
+    "react": "^18.2.0",
+    "react-countup": "^6.4.2",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.12.1"
+  },
+  "devDependencies": {
+    "@chainsafe/eslint-config": "^1.1.0",
+    "@types/prettier": "^2",
+    "@types/react": "^18.0.37",
+    "@types/react-dom": "^18.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.59.0",
+    "@typescript-eslint/parser": "^5.59.0",
+    "@vitejs/plugin-react": "^4.0.0",
+    "eslint": "^8.38.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.3.4",
+    "prettier": "^2.8.8",
+    "typescript": "^5.0.2",
+    "vite": "^4.3.9"
+  }
+}
