@@ -2,12 +2,15 @@ import { Button, Card, Divider, Form, Input, Row, Col, Statistic } from 'antd';
 import CountUp from 'react-countup';
 import { valueType } from 'antd/es/statistic/utils';
 import { CopyButton, formLayout } from '../utils';
+import { useLatestBlockHeight } from '../../hooks/useLatestBlockHeight.ts';
 
 const formatter = (value: valueType): JSX.Element => (
-  <CountUp end={Number(value)} separator="," />
+  <CountUp end={Number(value)} separator="," preserveValue />
 );
 
 export function AccountInfo(): JSX.Element {
+  const block = useLatestBlockHeight();
+
   return (
     <Card
       title="Account Info"
@@ -29,7 +32,7 @@ export function AccountInfo(): JSX.Element {
         <Col span={6}>
           <Statistic
             title="Latest Block"
-            value={112893}
+            value={block}
             precision={2}
             formatter={formatter}
           />
