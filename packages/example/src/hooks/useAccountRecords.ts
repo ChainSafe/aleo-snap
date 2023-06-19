@@ -5,7 +5,7 @@ import { getBlockRange } from '../services/node.ts';
 import { processRecord } from '../utils/processRecord.ts';
 import { useWasm } from './useWasm';
 
-const EXAMPLE_VIEW_KEY = 'AViewKey1hM4LSYhmKng5Rqn5tv3puZ9VkNDFeGiWPrEgL8H2TRw7';
+const EXAMPLE_VIEW_KEY = 'AViewKey1icf4Y5hujfpeLBpxfMSX2V8UGNVJ9pUa4m5SQd1HkWy5';
 
 export function useAccountRecords(): RecordPlaintext[] {
   const isReady = useWasm();
