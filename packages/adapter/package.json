@@ -1,11 +1,13 @@
 {
   "name": "@chainsafe/aleo-snap-adapter",
   "version": "0.0.1",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "private": true,
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc --build",
     "lint": "eslint --color --ext .ts src/",
     "lint:fix": "yarn run lint --fix",
     "test:unit": "echo",
@@ -16,5 +18,10 @@
     "@types/node": "18.15.11",
     "eslint": "^8.37.0",
     "typescript": "^5.0.3"
+  },
+  "dependencies": {
+    "@chainsafe/aleo-snap": "workspace:^",
+    "@chainsafe/aleo-snap-types": "workspace:^",
+    "@chainsafe/aleo-snap-wasm": "workspace:^"
   }
 }

@@ -8,15 +8,15 @@ import { sign } from "./rpc/sign";
 import { decrypt } from "./rpc/decrypt";
 import { verify } from "./rpc/verify";
 
-export enum Methods {
+let wasm: InitOutput;
+
+enum Methods {
   GetAccount = "aleo_getAccount",
   GetViewKey = "aleo_getViewKey",
   Decrypt = "aleo_decrypt",
   Sign = "aleo_sign",
   Verify = "aleo_verify",
 }
-
-let wasm: InitOutput;
 
 export const onRpcRequest: OnRpcRequestHandler = async ({
   request,
