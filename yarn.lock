@@ -1717,6 +1717,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@chainsafe/aleo-snap@workspace:packages/snap"
   dependencies:
+    "@aleohq/sdk": ^0.4.3
     "@chainsafe/aleo-snap-wasm": "workspace:^"
     "@chainsafe/dappeteer": ^5.2
     "@metamask/snaps-cli": ^0.32.2

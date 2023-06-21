@@ -1,13 +1,13 @@
-import type { Block, Transition } from '@aleohq/sdk';
+import type { Block, Transition } from "@aleohq/sdk";
 
-const BASE_URL = 'https://vm.aleo.org/';
+const BASE_URL = "https://vm.aleo.org/";
 
 interface RequestOptions {
   signal?: AbortSignal;
 }
 async function request<Response>(
   url: `/${string}`,
-  options: RequestOptions = {},
+  options: RequestOptions = {}
 ): Promise<Response> {
   const urlPath = new URL(`/api/testnet3${url}`, BASE_URL);
   const response = await fetch(urlPath, options);
@@ -16,10 +16,13 @@ async function request<Response>(
 }
 
 export async function getLatestBlock(signal?: AbortSignal): Promise<Block> {
-  return await request<Block>('/latest/block', { signal });
+  return await request<Block>("/latest/block", { signal });
 }
 
-export async function getBlockRange(start: number, end: number): Promise<Block[]> {
+export async function getBlockRange(
+  start: number,
+  end: number
+): Promise<Block[]> {
   return await request<Block[]>(`/blocks?start=${start}&end=${end}`);
 }
 

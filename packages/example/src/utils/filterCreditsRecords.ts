@@ -3,10 +3,10 @@ import {
   RecordCiphertext,
   RecordPlaintext,
 } from '@chainsafe/aleo-snap-wasm/src/wasmBuild/aleo_wasm';
-import { Block } from '@aleohq/sdk';
+import type { Block } from '@aleohq/sdk';
 
 // similar to findUnspentRecords from https://github.com/AleoHQ/sdk/blob/bfd4b9768ac83872cd0f1c6a81cdac66a3525803/sdk/src/aleo_network_client.ts#LL237C9-L237C27
-export function processRecord(viewKey: ViewKey) {
+export function filterCreditsRecords(viewKey: ViewKey) {
   return function (blocks: Block[]) {
     const records: RecordPlaintext[] = [];
     blocks.forEach(({ transactions: confirmedTransactions }) => {
@@ -19,11 +19,8 @@ export function processRecord(viewKey: ViewKey) {
 
           transition.outputs.forEach(({ type, value }) => {
             if (type !== 'record') return;
-            console.log(value);
             const record = RecordCiphertext.fromString(value);
-            console.log(record.isOwner(viewKey));
             if (record.isOwner(viewKey)) {
-              console.log("im owner");
               const recordPlaintext = record.decrypt(viewKey);
               records.push(recordPlaintext);
             }
