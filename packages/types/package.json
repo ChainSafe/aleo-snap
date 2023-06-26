@@ -1,5 +1,5 @@
 {
-  "name": "@chainsafe/aleo-snap-types",
+  "name": "@chainsafe/aleo-snap-shared",
   "version": "0.0.0",
   "types": "./index.d.ts",
   "license": "(Apache-2.0 AND MIT)",

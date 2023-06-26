@@ -1,4 +1,4 @@
-import { AleoSnapApi } from "@chainsafe/aleo-snap-types";
+import { AleoSnapApi } from "@chainsafe/aleo-snap-shared";
 import { getAccount, getViewKey, decrypt, sign, verify } from "./methods";
 
 export class AleoSnap {

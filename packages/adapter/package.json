@@ -21,7 +21,6 @@
   },
   "dependencies": {
     "@chainsafe/aleo-snap": "workspace:^",
-    "@chainsafe/aleo-snap-types": "workspace:^",
-    "@chainsafe/aleo-snap-wasm": "workspace:^"
+    "@chainsafe/aleo-snap-shared": "workspace:^"
   }
 }

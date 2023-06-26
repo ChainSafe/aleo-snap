@@ -1,5 +1,7 @@
 import { Signature } from "@chainsafe/aleo-snap-wasm";
 
+export { Signature } from "@chainsafe/aleo-snap-wasm";
+
 export enum Methods {
   GetAccount = "aleo_getAccount",
   GetViewKey = "aleo_getViewKey",

@@ -1,4 +1,4 @@
-import { Signature } from "@chainsafe/aleo-snap-wasm";
+import { Signature } from "@chainsafe/aleo-snap-shared";
 import { AleoSnap } from "./snap";
 
 async function sendSnapMethod<T>(

@@ -2,8 +2,8 @@ import { expect, use } from "chai";
 import sinonChai from "sinon-chai";
 import chaiAsPromised from "chai-as-promised";
 import { Dappeteer, DappeteerPage, initSnapEnv } from "@chainsafe/dappeteer";
-import { Methods } from "../../src";
 import { buildSnap } from "./utils";
+import { Methods } from "../../../types";
 
 use(sinonChai);
 use(chaiAsPromised);
