@@ -21,9 +21,9 @@ export async function filterUnspentRecords(
       try {
         await getTransitionId(id);
       } catch {
-        return false;
+        return record;
       }
-      return record;
+      return false;
     })
   );
 

@@ -24,7 +24,7 @@ export const updateLatestSyncBlock = async (
   });
 };
 
-interface Record {
+export interface Record {
   value: string;
 }
 
@@ -74,4 +74,23 @@ export const updateCurrentProcess = async (
       newState: { ...persistedData, currentProcess },
     },
   });
+};
+
+export const handleNetworkReset = async (
+  snap: SnapsGlobalObject,
+  latestBlock: number
+): Promise<void> => {
+  const persistedData = await getPersistedData(snap);
+
+  if (
+    persistedData.latestSyncBlock &&
+    persistedData.latestSyncBlock - 1000 > latestBlock
+  )
+    await snap.request({
+      method: "snap_manageState",
+      params: {
+        operation: "update",
+        newState: { ...persistedData, records: "[]", latestSyncBlock: 0 },
+      },
+    });
 };

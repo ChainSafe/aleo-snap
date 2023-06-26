@@ -3,6 +3,7 @@ import {
   getCurrentProcess,
   getLatestSyncBlock,
   getRecords,
+  handleNetworkReset,
   updateCurrentProcess,
   updateLatestSyncBlock,
   updateRecords,
@@ -18,8 +19,16 @@ export const syncRecords = async (snap: SnapsGlobalObject): Promise<null> => {
   const privateKey = await getPrivateKey(snap);
   const viewKey = privateKey.to_view_key();
 
-  const allRecords = await getRecords(snap);
+  const persistedData = await snap.request({
+    method: "snap_manageState",
+    params: { operation: "get" },
+  });
+  console.log(persistedData);
+
   const latestBlock = await ensureLatestBlock();
+  await handleNetworkReset(snap, latestBlock);
+
+  const allRecords = await getRecords(snap);
   await updateCurrentProcess(snap, latestBlock);
 
   let isSynced = false;
@@ -46,23 +55,16 @@ export const syncRecords = async (snap: SnapsGlobalObject): Promise<null> => {
     console.log(unspentRecords.length, unspentRecords);
     unspentRecords.forEach((record) => {
       if (
-        !allRecords.find(
+        allRecords.findIndex(
           (storedRecord) => storedRecord.value === record.toString()
-        )
+        ) !== -1
       )
         return;
       allRecords.push({ value: record.toString() });
     });
 
-    console.warn(unspentRecords, allRecords);
     if (!unspentRecords.length) await updateRecords(snap, allRecords);
     await updateLatestSyncBlock(snap, highestSyncedBlock);
-
-    const persistedData = await snap.request({
-      method: "snap_manageState",
-      params: { operation: "get" },
-    });
-    console.log(persistedData);
 
     if (highestSyncedBlock === latestSyncedBlock) isSynced = true;
   }
