@@ -8,6 +8,8 @@ import { sign } from "./rpc/sign";
 import { decrypt } from "./rpc/decrypt";
 import { verify } from "./rpc/verify";
 import { syncRecords } from "./cron/syncRecords";
+import { getRecords } from "./rpc/getRecords";
+import { getBalance } from "./rpc/getBalance";
 
 export enum Methods {
   GetAccount = "aleo_getAccount",
@@ -17,6 +19,8 @@ export enum Methods {
   Verify = "aleo_verify",
   // others
   SyncRecords = "aleo_syncRecords",
+  GetBalance = "aleo_getBalance",
+  GetRecords = "aleo_getRecords",
 }
 
 let wasm: InitOutput;
@@ -47,6 +51,13 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
     case Methods.Verify: {
       assert(request.params, verifySchema);
       return verify(snap, request.params);
+    }
+    //
+    case Methods.GetBalance: {
+      return getBalance(snap, origin);
+    }
+    case Methods.GetRecords: {
+      return getRecords(snap, origin);
     }
     default:
       throw new Error("Method not found.");
