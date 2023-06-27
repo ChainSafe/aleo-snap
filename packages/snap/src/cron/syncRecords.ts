@@ -1,4 +1,5 @@
 import { SnapsGlobalObject } from "@metamask/snaps-types";
+import { RecordCiphertext } from "@chainsafe/aleo-snap-wasm";
 import {
   getCurrentProcess,
   getLatestSyncBlock,
@@ -70,5 +71,26 @@ export const syncRecords = async (snap: SnapsGlobalObject): Promise<null> => {
   }
 
   console.warn("it is synced!");
+  if (isSynced) {
+    console.warn("remove spent records");
+    const unspentRecords = await filterUnspentRecords(
+      viewKey,
+      privateKey,
+      allRecords.map(({ value }) => RecordCiphertext.fromString(value))
+    );
+    if (unspentRecords.length !== allRecords.length) {
+      console.warn(
+        "new records size",
+        unspentRecords.length,
+        " old ",
+        allRecords.length
+      );
+      await updateRecords(
+        snap,
+        unspentRecords.map((record) => ({ value: record.toString() }))
+      );
+    }
+  }
+
   return null;
 };
