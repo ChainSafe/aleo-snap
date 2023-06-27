@@ -1,5 +1,6 @@
 import { OnRpcRequestHandler } from "@metamask/snaps-types";
 import { InitOutput, initializeWasm } from "@chainsafe/aleo-snap-wasm";
+import { Methods } from "@chainsafe/aleo-snap-shared";
 import { assert } from "./utils/assert";
 import { getAccount } from "./rpc/getAccount";
 import { getViewKey } from "./rpc/getViewKey";
@@ -7,7 +8,6 @@ import { decryptSchema, signSchema, verifySchema } from "./utils/params";
 import { sign } from "./rpc/sign";
 import { decrypt } from "./rpc/decrypt";
 import { verify } from "./rpc/verify";
-import { Methods } from "@chainsafe/aleo-snap-shared";
 
 let wasm: InitOutput;
 
