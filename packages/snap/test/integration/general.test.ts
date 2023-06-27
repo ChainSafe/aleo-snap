@@ -3,7 +3,7 @@ import sinonChai from "sinon-chai";
 import chaiAsPromised from "chai-as-promised";
 import { Dappeteer, DappeteerPage, initSnapEnv } from "@chainsafe/dappeteer";
 import { buildSnap } from "./utils";
-import { Methods } from "../../../types";
+import { Methods } from "@chainsafe/aleo-snap-shared";
 
 use(sinonChai);
 use(chaiAsPromised);
