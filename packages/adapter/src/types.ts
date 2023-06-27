@@ -1,4 +1,4 @@
-import { SnapRpcMethodRequest } from "@chainsafe/aleo-snap-types";
+import { SnapRpcMethodRequest } from "@chainsafe/aleo-snap-shared";
 
 export type GetSnapsResponse = {
   [k: string]: {
