@@ -1,8 +1,10 @@
 {
   "name": "@chainsafe/aleo-snap-shared",
   "version": "0.0.1",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "types": "./index.ts",
-  "license": "(Apache-2.0 AND MIT)",
   "author": "chainsafe <info@chainsafe.io>",
   "scripts": {
     "build": "tsc --build"
@@ -19,5 +21,8 @@
     "@types/node": "18.15.11",
     "eslint": "^8.37.0",
     "typescript": "^5.0.3"
+  },
+  "dependencies": {
+    "@chainsafe/aleo-snap-wasm": "workspace:^"
   }
 }

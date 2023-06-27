@@ -7,16 +7,9 @@ import { decryptSchema, signSchema, verifySchema } from "./utils/params";
 import { sign } from "./rpc/sign";
 import { decrypt } from "./rpc/decrypt";
 import { verify } from "./rpc/verify";
+import { Methods } from "@chainsafe/aleo-snap-shared";
 
 let wasm: InitOutput;
-
-enum Methods {
-  GetAccount = "aleo_getAccount",
-  GetViewKey = "aleo_getViewKey",
-  Decrypt = "aleo_decrypt",
-  Sign = "aleo_sign",
-  Verify = "aleo_verify",
-}
 
 export const onRpcRequest: OnRpcRequestHandler = async ({
   request,

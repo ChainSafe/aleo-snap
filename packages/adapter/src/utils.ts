@@ -39,6 +39,7 @@ export async function isMetaMaskFlaskAvailable(): Promise<boolean> {
   }
   return await Promise.race([
     isMetaMaskFlask(),
+    // in case of wallet not having rpc method web3_clientVersion
     new Promise<boolean>(() =>
       setTimeout(() => {
         return false;
