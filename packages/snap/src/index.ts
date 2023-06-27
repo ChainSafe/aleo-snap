@@ -17,7 +17,6 @@ export enum Methods {
   Decrypt = "aleo_decrypt",
   Sign = "aleo_sign",
   Verify = "aleo_verify",
-  // others
   SyncRecords = "aleo_syncRecords",
   GetBalance = "aleo_getBalance",
   GetRecords = "aleo_getRecords",

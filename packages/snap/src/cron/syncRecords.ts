@@ -16,22 +16,15 @@ import { filterUnspentRecords } from "../utils/filterUnspentRecords";
 import { ensureLatestBlock } from "../utils/ensureLatestBlock";
 
 export const syncRecords = async (snap: SnapsGlobalObject): Promise<null> => {
-  console.warn("syncRecords", new Date().toString());
   const privateKey = await getPrivateKey(snap);
   const viewKey = privateKey.to_view_key();
 
-  const persistedData = await snap.request({
-    method: "snap_manageState",
-    params: { operation: "get" },
-  });
-  console.log(persistedData);
-
   const latestBlock = await ensureLatestBlock();
   await handleNetworkReset(snap, latestBlock);
-
   const allRecords = await getRecords(snap);
   await updateCurrentProcess(snap, latestBlock);
 
+  // Main loop to fetch all available blocks
   let isSynced = false;
   while (!isSynced) {
     const latestSyncedBlock = await getLatestSyncBlock(snap);
@@ -43,8 +36,6 @@ export const syncRecords = async (snap: SnapsGlobalObject): Promise<null> => {
         ? latestBlock
         : latestSyncedBlock + 50;
 
-    console.warn(latestBlock, latestSyncedBlock, highestSyncedBlock);
-
     const blocks = await getBlockRange(latestSyncedBlock, highestSyncedBlock);
     const records = filterCreditsRecords(viewKey)(blocks);
 
@@ -53,7 +44,6 @@ export const syncRecords = async (snap: SnapsGlobalObject): Promise<null> => {
       privateKey,
       records
     );
-    console.log(unspentRecords.length, unspentRecords);
     unspentRecords.forEach((record) => {
       if (
         allRecords.findIndex(
@@ -70,26 +60,18 @@ export const syncRecords = async (snap: SnapsGlobalObject): Promise<null> => {
     if (highestSyncedBlock === latestSyncedBlock) isSynced = true;
   }
 
-  console.warn("it is synced!");
+  // Remove all spent records from "database"
   if (isSynced) {
-    console.warn("remove spent records");
     const unspentRecords = await filterUnspentRecords(
       viewKey,
       privateKey,
       allRecords.map(({ value }) => RecordCiphertext.fromString(value))
     );
-    if (unspentRecords.length !== allRecords.length) {
-      console.warn(
-        "new records size",
-        unspentRecords.length,
-        " old ",
-        allRecords.length
-      );
+    if (unspentRecords.length !== allRecords.length)
       await updateRecords(
         snap,
         unspentRecords.map((record) => ({ value: record.toString() }))
       );
-    }
   }
 
   return null;
