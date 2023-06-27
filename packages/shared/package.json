@@ -1,11 +1,11 @@
 {
   "name": "@chainsafe/aleo-snap-shared",
-  "version": "0.0.0",
-  "types": "./index.d.ts",
+  "version": "0.0.1",
+  "types": "./index.ts",
   "license": "(Apache-2.0 AND MIT)",
   "author": "chainsafe <info@chainsafe.io>",
-  "publishConfig": {
-    "access": "public"
+  "scripts": {
+    "build": "tsc --build"
   },
   "description": "Types for Aleo snap.",
   "keywords": [
@@ -13,5 +13,11 @@
     "metamask",
     "snap",
     "dapp"
-  ]
+  ],
+  "devDependencies": {
+    "@types/eslint": "^8.37.0",
+    "@types/node": "18.15.11",
+    "eslint": "^8.37.0",
+    "typescript": "^5.0.3"
+  }
 }

@@ -1684,9 +1684,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@chainsafe/aleo-snap-shared@workspace:^, @chainsafe/aleo-snap-shared@workspace:packages/types":
+"@chainsafe/aleo-snap-shared@workspace:^, @chainsafe/aleo-snap-shared@workspace:packages/shared":
   version: 0.0.0-use.local
-  resolution: "@chainsafe/aleo-snap-shared@workspace:packages/types"
+  resolution: "@chainsafe/aleo-snap-shared@workspace:packages/shared"
+  dependencies:
+    "@types/eslint": ^8.37.0
+    "@types/node": 18.15.11
+    eslint: ^8.37.0
+    typescript: ^5.0.3
   languageName: unknown
   linkType: soft
 
