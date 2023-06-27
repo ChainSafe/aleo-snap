@@ -1,10 +1,10 @@
 import chai, { expect } from "chai";
 import sinon from "sinon";
 import sinonChai from "sinon-chai";
-import { getAccount } from "../../../src/rpc/getAccount";
-import { mockSnapProvider } from "./wallet.stub";
-import { bip44Entropy1Node } from "../aleo/bip44Entropy.mock";
 import { initializeWasm } from "@chainsafe/aleo-snap-wasm";
+import { getAccount } from "../../../src/rpc/getAccount";
+import { bip44Entropy1Node } from "../aleo/bip44Entropy.mock";
+import { mockSnapProvider } from "./wallet.stub";
 
 chai.use(sinonChai);
 
@@ -27,7 +27,8 @@ describe("Test rpc handler function: getAccount", function () {
 
     const account = await getAccount(snapStub);
 
-    expect(account).to.be.eql("aleo1j2mxy4kp3snsrzhs95dlar6eyekerg62h4yetw93eufw76u8qq9q7ar5qz");
+    expect(account).to.be.eql(
+      "aleo1j2mxy4kp3snsrzhs95dlar6eyekerg62h4yetw93eufw76u8qq9q7ar5qz"
+    );
   });
-
 });

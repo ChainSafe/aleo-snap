@@ -1,7 +1,10 @@
 import { Outlet } from 'react-router-dom';
+import { useWasm } from '../../hooks/useWasm.ts';
 
 export function Root(): JSX.Element {
-  // const location = useLocation();
+  const isReady = useWasm();
+
+  if (!isReady) return <div />;
 
   /*if (false) {
     return <h1>Fail</h1>;
