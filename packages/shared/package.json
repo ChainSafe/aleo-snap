@@ -4,7 +4,6 @@
   "main": "dist/index.js",
   "module": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "types": "./index.ts",
   "author": "chainsafe <info@chainsafe.io>",
   "scripts": {
     "build": "tsc --build"
