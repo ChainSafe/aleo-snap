@@ -1,3 +1,5 @@
 {
-    "packages/snap": "1.0.5"
+    "packages/snap": "1.0.5",
+    "packages/adapter": "1.0.5",
+    "packages/shared": "1.0.5"
 }

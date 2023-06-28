@@ -16,6 +16,24 @@
             "jsonpath": "$.version"
           }
         ]
+      },
+      "packages/adapter": {
+        "releaseType": "node",
+        "draft": false,
+        "prerelease": false,
+        "bumpMinorPreMajor": false,
+        "bumpPatchForMinorPreMajor": false,
+        "changelogPath": "CHANGELOG.md",
+        "versioning": "default"
+      },
+      "packages/shared": {
+        "releaseType": "node",
+        "draft": false,
+        "prerelease": false,
+        "bumpMinorPreMajor": false,
+        "bumpPatchForMinorPreMajor": false,
+        "changelogPath": "CHANGELOG.md",
+        "versioning": "default"
       }
     }
   }
