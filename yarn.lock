@@ -1690,10 +1690,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chainsafe/aleo-snap-adapter@workspace:packages/adapter":
+"@chainsafe/aleo-snap-adapter@workspace:^, @chainsafe/aleo-snap-adapter@workspace:packages/adapter":
   version: 0.0.0-use.local
   resolution: "@chainsafe/aleo-snap-adapter@workspace:packages/adapter"
   dependencies:
+    "@chainsafe/aleo-snap-shared": "workspace:^"
+    "@types/eslint": ^8.37.0
+    "@types/node": 18.15.11
+    eslint: ^8.37.0
+    typescript: ^5.0.3
+  languageName: unknown
+  linkType: soft
+
+"@chainsafe/aleo-snap-shared@workspace:^, @chainsafe/aleo-snap-shared@workspace:packages/shared":
+  version: 0.0.0-use.local
+  resolution: "@chainsafe/aleo-snap-shared@workspace:packages/shared"
+  dependencies:
+    "@chainsafe/aleo-snap-wasm": "workspace:^"
     "@types/eslint": ^8.37.0
     "@types/node": 18.15.11
     eslint: ^8.37.0
@@ -1718,6 +1731,7 @@ __metadata:
   resolution: "@chainsafe/aleo-snap@workspace:packages/snap"
   dependencies:
     "@aleohq/sdk": ^0.4.3
+    "@chainsafe/aleo-snap-shared": "workspace:^"
     "@chainsafe/aleo-snap-wasm": "workspace:^"
     "@chainsafe/dappeteer": ^5.2
     "@metamask/snaps-cli": ^0.32.2
@@ -5659,6 +5673,7 @@ __metadata:
   dependencies:
     "@aleohq/sdk": ^0.4.3
     "@ant-design/icons": ^5
+    "@chainsafe/aleo-snap-adapter": "workspace:^"
     "@chainsafe/aleo-snap-wasm": "workspace:^"
     "@chainsafe/eslint-config": ^1.1.0
     "@types/prettier": ^2

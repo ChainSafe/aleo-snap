@@ -1,19 +1,14 @@
 import { SnapsGlobalObject } from "@metamask/snaps-types";
 import { heading, panel, text } from "@metamask/snaps-ui";
 import { RecordCiphertext } from "@chainsafe/aleo-snap-wasm";
+import { Balance, Record } from "@chainsafe/aleo-snap-shared";
 import { getPersistedData } from "../storage";
-import { Record } from "../storage/records";
 import { getPrivateKey } from "../aleo/account";
-
-interface Records {
-  latestSyncBlock: number;
-  balance: string;
-}
 
 export const getBalance = async (
   snap: SnapsGlobalObject,
   origin: string
-): Promise<Records> => {
+): Promise<Balance> => {
   const confirmation = await snap.request({
     method: "snap_dialog",
     params: {

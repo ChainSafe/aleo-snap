@@ -1,5 +1,6 @@
 import { OnRpcRequestHandler, OnCronjobHandler } from "@metamask/snaps-types";
 import { InitOutput, initializeWasm } from "@chainsafe/aleo-snap-wasm";
+import { Methods } from "@chainsafe/aleo-snap-shared";
 import { assert } from "./utils/assert";
 import { getAccount } from "./rpc/getAccount";
 import { getViewKey } from "./rpc/getViewKey";
@@ -10,17 +11,6 @@ import { verify } from "./rpc/verify";
 import { syncRecords } from "./cron/syncRecords";
 import { getRecords } from "./rpc/getRecords";
 import { getBalance } from "./rpc/getBalance";
-
-export enum Methods {
-  GetAccount = "aleo_getAccount",
-  GetViewKey = "aleo_getViewKey",
-  Decrypt = "aleo_decrypt",
-  Sign = "aleo_sign",
-  Verify = "aleo_verify",
-  SyncRecords = "aleo_syncRecords",
-  GetBalance = "aleo_getBalance",
-  GetRecords = "aleo_getRecords",
-}
 
 let wasm: InitOutput;
 

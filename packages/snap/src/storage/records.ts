@@ -1,4 +1,5 @@
 import { SnapsGlobalObject } from "@metamask/snaps-types";
+import { Record } from "@chainsafe/aleo-snap-shared";
 import { getPersistedData } from "./index";
 
 export const getLatestSyncBlock = async (
@@ -23,10 +24,6 @@ export const updateLatestSyncBlock = async (
     },
   });
 };
-
-export interface Record {
-  value: string;
-}
 
 export const getRecords = async (
   snap: SnapsGlobalObject

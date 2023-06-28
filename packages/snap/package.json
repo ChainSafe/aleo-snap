@@ -59,6 +59,7 @@
     "typescript": "^5.0.3"
   },
   "dependencies": {
+    "@chainsafe/aleo-snap-shared": "workspace:^",
     "@chainsafe/aleo-snap-wasm": "workspace:^",
     "@metamask/snaps-ui": "^0.32.2"
   }
