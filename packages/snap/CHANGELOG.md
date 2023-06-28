@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.1.0](https://github.com/ChainSafe/aleo-snap/compare/aleo-snap-v1.0.5...aleo-snap-v1.1.0) (2023-06-28)
+
+
+### Features
+
+* aleo-snap-adapter ([#40](https://github.com/ChainSafe/aleo-snap/issues/40)) ([254f723](https://github.com/ChainSafe/aleo-snap/commit/254f7233e2255302d8c7ce0f1c55787ccb65f104))
+* indexing balance ([#41](https://github.com/ChainSafe/aleo-snap/issues/41)) ([ca579a1](https://github.com/ChainSafe/aleo-snap/commit/ca579a18cb488b423782273c967155010e147efa))
+* snap web ([#31](https://github.com/ChainSafe/aleo-snap/issues/31)) ([93cbbe9](https://github.com/ChainSafe/aleo-snap/commit/93cbbe9158be4b4283cb14be82d5dc21b7b2069c))
+
 ## [1.0.5](https://github.com/ChainSafe/aleo-snap/compare/aleo-snap-v1.0.4...aleo-snap-v1.0.5) (2023-06-07)
 
 
