@@ -1,5 +1,14 @@
 import { AleoSnapApi } from "@chainsafe/aleo-snap-shared";
-import { getAccount, getViewKey, decrypt, sign, verify } from "./methods";
+import {
+  getAccount,
+  getViewKey,
+  decrypt,
+  sign,
+  verify,
+  syncRecords,
+  getBalance,
+  getRecords,
+} from "./methods";
 
 export class AleoSnap {
   protected readonly snapOrigin: string;
@@ -18,6 +27,9 @@ export class AleoSnap {
       decrypt: decrypt.bind(this),
       sign: sign.bind(this),
       verify: verify.bind(this),
+      syncRecords: syncRecords.bind(this),
+      getBalance: getBalance.bind(this),
+      getRecords: getRecords.bind(this),
     };
   };
 }

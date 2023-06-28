@@ -8,6 +8,9 @@ export enum Methods {
   Decrypt = "aleo_decrypt",
   Sign = "aleo_sign",
   Verify = "aleo_verify",
+  SyncRecords = "aleo_syncRecords",
+  GetBalance = "aleo_getBalance",
+  GetRecords = "aleo_getRecords",
 }
 
 export interface GetAccountRequest {
@@ -41,12 +44,27 @@ export interface VerifyRequest {
   };
 }
 
+export interface GetBalanceRequest {
+  method: "aleo_getBalance";
+}
+
+export interface GetRecordsRequest {
+  method: "aleo_getRecords";
+}
+
+export interface SyncRecordsRequest {
+  method: "aleo_syncRecords";
+}
+
 export type AleoSnapRpcRequest =
   | GetAccountRequest
   | GetViewKeyRequest
   | DecryptRequest
   | SignRequest
-  | VerifyRequest;
+  | VerifyRequest
+  | GetBalanceRequest
+  | GetRecordsRequest
+  | SyncRecordsRequest;
 
 type Method = AleoSnapRpcRequest["method"];
 
@@ -75,4 +93,20 @@ export interface AleoSnapApi {
   decrypt(cipherText: string, viewKey?: string): Promise<string>;
   sign(message: string): Promise<Signature>;
   verify(message: string, signature: string): Promise<boolean>;
+  getBalance(): Promise<Balance>;
+  getRecords(): Promise<Records>;
+  syncRecords(): Promise<null>;
+}
+
+export interface Record {
+  value: string;
+}
+export interface Records {
+  latestSyncBlock: number;
+  records: Record[];
+}
+
+export interface Balance {
+  latestSyncBlock: number;
+  balance: string;
 }

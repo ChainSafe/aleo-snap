@@ -15,7 +15,7 @@ export const getViewKey = async (
       type: "confirmation",
       content: panel([
         heading(`Giving View Key Access`),
-        text(`${origin} is requesting access to View Key`),
+        text(`**${origin}** is requesting access to View Key`),
       ]),
     },
   });

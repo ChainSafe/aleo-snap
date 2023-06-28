@@ -7,7 +7,7 @@
     "url": "git+https://github.com/chainsafe/aleo-snap.git"
   },
   "source": {
-    "shasum": "vfQL+EJvbjLt5SHVq1JOFqAAkrJhZPYIqaLTp4Of1vY=",
+    "shasum": "IZleCUL3EgBxiLuD5ucBq2k1X9OgyKIylnwESy6fpm4=",
     "location": {
       "npm": {
         "filePath": "./dist/bundle.js",
@@ -17,18 +17,29 @@
     }
   },
   "initialPermissions": {
+    "endowment:cronjob": {
+      "jobs": [
+        {
+          "expression": "* * * * *",
+          "request": {
+            "method": "aleo_syncRecords"
+          }
+        }
+      ]
+    },
     "endowment:rpc": {
       "dapps": true,
       "snaps": true
     },
-    "snap_dialog": {},
+    "endowment:webassembly": {},
     "endowment:network-access": {},
+    "snap_dialog": {},
+    "snap_manageState": {},
     "snap_getBip44Entropy": [
       {
         "coinType": 1
       }
-    ],
-    "endowment:webassembly": {}
+    ]
   },
   "manifestVersion": "0.1"
 }

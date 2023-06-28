@@ -1,4 +1,9 @@
-import { Signature } from "@chainsafe/aleo-snap-shared";
+import {
+  Balance,
+  Methods,
+  Records,
+  Signature,
+} from "@chainsafe/aleo-snap-shared";
 import { AleoSnap } from "./snap";
 
 async function sendSnapMethod<T>(
@@ -15,11 +20,11 @@ async function sendSnapMethod<T>(
 }
 
 export async function getAccount(this: AleoSnap): Promise<string> {
-  return await sendSnapMethod({ method: "aleo_getAccount" }, this.snapId);
+  return await sendSnapMethod({ method: Methods.GetAccount }, this.snapId);
 }
 
 export async function getViewKey(this: AleoSnap): Promise<string> {
-  return await sendSnapMethod({ method: "aleo_getViewKey" }, this.snapId);
+  return await sendSnapMethod({ method: Methods.GetViewKey }, this.snapId);
 }
 
 export async function decrypt(
@@ -29,7 +34,7 @@ export async function decrypt(
 ): Promise<string> {
   return await sendSnapMethod(
     {
-      method: "aleo_decrypt",
+      method: Methods.Decrypt,
       params: {
         viewKey,
         cipherText,
@@ -45,7 +50,7 @@ export async function sign(
 ): Promise<Signature> {
   return await sendSnapMethod(
     {
-      method: "aleo_sign",
+      method: Methods.Sign,
       params: {
         message,
       },
@@ -61,7 +66,7 @@ export async function verify(
 ): Promise<boolean> {
   return await sendSnapMethod(
     {
-      method: "aleo_verify",
+      method: Methods.Verify,
       params: {
         message,
         signature,
@@ -69,4 +74,16 @@ export async function verify(
     },
     this.snapId
   );
+}
+
+export async function syncRecords(this: AleoSnap): Promise<null> {
+  return await sendSnapMethod({ method: Methods.SyncRecords }, this.snapId);
+}
+
+export async function getBalance(this: AleoSnap): Promise<Balance> {
+  return await sendSnapMethod({ method: Methods.GetBalance }, this.snapId);
+}
+
+export async function getRecords(this: AleoSnap): Promise<Records> {
+  return await sendSnapMethod({ method: Methods.GetRecords }, this.snapId);
 }

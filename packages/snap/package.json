@@ -35,6 +35,7 @@
   "author": "ChainSafe <info@chainsafe.io>",
   "homepage": "https://github.com/chainsafe/aleo-snap#readme",
   "devDependencies": {
+    "@aleohq/sdk": "^0.4.3",
     "@chainsafe/dappeteer": "^5.2",
     "@metamask/snaps-cli": "^0.32.2",
     "@metamask/snaps-types": "^0.32.2",

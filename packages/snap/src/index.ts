@@ -1,4 +1,4 @@
-import { OnRpcRequestHandler } from "@metamask/snaps-types";
+import { OnRpcRequestHandler, OnCronjobHandler } from "@metamask/snaps-types";
 import { InitOutput, initializeWasm } from "@chainsafe/aleo-snap-wasm";
 import { Methods } from "@chainsafe/aleo-snap-shared";
 import { assert } from "./utils/assert";
@@ -8,6 +8,9 @@ import { decryptSchema, signSchema, verifySchema } from "./utils/params";
 import { sign } from "./rpc/sign";
 import { decrypt } from "./rpc/decrypt";
 import { verify } from "./rpc/verify";
+import { syncRecords } from "./cron/syncRecords";
+import { getRecords } from "./rpc/getRecords";
+import { getBalance } from "./rpc/getBalance";
 
 let wasm: InitOutput;
 
@@ -38,6 +41,27 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
       assert(request.params, verifySchema);
       return verify(snap, request.params);
     }
+    //
+    case Methods.GetBalance: {
+      return getBalance(snap, origin);
+    }
+    case Methods.GetRecords: {
+      return getRecords(snap, origin);
+    }
+    default:
+      throw new Error("Method not found.");
+  }
+};
+
+export const onCronjob: OnCronjobHandler = async ({ request }) => {
+  if (!wasm) {
+    wasm = await initializeWasm();
+  }
+
+  switch (request.method) {
+    case Methods.SyncRecords:
+      return syncRecords(snap);
+
     default:
       throw new Error("Method not found.");
   }
