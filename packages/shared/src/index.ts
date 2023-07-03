@@ -1,6 +1,6 @@
-import { Signature } from "@chainsafe/aleo-snap-wasm";
+import type { Signature } from "@chainsafe/aleo-snap-wasm";
 
-export { Signature } from "@chainsafe/aleo-snap-wasm";
+export type { Signature } from "@chainsafe/aleo-snap-wasm";
 
 export enum Methods {
   GetAccount = "aleo_getAccount",
@@ -66,7 +66,7 @@ export type AleoSnapRpcRequest =
   | GetRecordsRequest
   | SyncRecordsRequest;
 
-type Method = AleoSnapRpcRequest["method"];
+export type Method = AleoSnapRpcRequest["method"];
 
 export interface WalletRequestSnapsRequest {
   method: "wallet_requestSnaps";

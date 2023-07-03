@@ -18,6 +18,7 @@
     "@aleohq/sdk": "^0.4.3",
     "@ant-design/icons": "^5",
     "@chainsafe/aleo-snap-adapter": "workspace:^",
+    "@chainsafe/aleo-snap-shared": "workspace:^",
     "@chainsafe/aleo-snap-wasm": "workspace:^",
     "antd": "^5",
     "copy-to-clipboard": "^3.3.3",
