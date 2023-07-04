@@ -6,9 +6,11 @@ import {
 import { MetamaskRpcRequest } from '@chainsafe/aleo-snap-shared';
 import { useCallback, useEffect, useState } from 'react';
 
-const isDev = true;
-const snapOrigin = isDev ? 'local:http://localhost:8081' : 'npm:@chainsafe/aleo-snap';
-const version = '1.0.5';
+const isDev = import.meta.env.VITE_APP_IS_DEV;
+const snapOrigin = isDev
+  ? import.meta.env.VITE_APP_SNAP_ORIGIN_LOCAL
+  : import.meta.env.VITE_APP_SNAP_ORIGIN_LOCAL;
+const version = import.meta.env.VITE_APP_SNAP_VERSION_NPM;
 type aleoSnapOriginKey = typeof snapOrigin;
 
 declare global {
@@ -23,6 +25,7 @@ declare global {
 export interface ISnap {
   isMetaMaskFlask: boolean;
   snapInstalled: boolean;
+  checksCompleted: boolean;
   enable: () => Promise<void>;
   address: string;
 }
@@ -30,6 +33,7 @@ export interface ISnap {
 export function useSnap(): ISnap {
   const [isMetaMaskFlask, setIsMetaMaskFlask] = useState(false);
   const [snapInstalled, setSnapInstalled] = useState(false);
+  const [checksCompleted, setChecksCompleted] = useState(false);
   const [address, setAddress] = useState<string>('');
 
   const enable = useCallback(async () => {
@@ -45,6 +49,19 @@ export function useSnap(): ISnap {
     setSnapInstalled(result[snapOrigin].enabled);
   }, [isMetaMaskFlask]);
 
+  //initial checks
+  useEffect(() => {
+    void (async () => {
+      const isMetaMaskFlask = await isMetaMaskFlaskAvailable();
+      if (!isMetaMaskFlask) return;
+      const isInstalled = await isSnapInstalled(snapOrigin, version);
+      setChecksCompleted(true);
+      setIsMetaMaskFlask(isMetaMaskFlask);
+      setSnapInstalled(isInstalled);
+    })();
+  }, []);
+
+  //initial rpc calls
   useEffect(() => {
     if (snapInstalled) {
       void (async () => {
@@ -56,14 +73,7 @@ export function useSnap(): ISnap {
       })();
       return;
     }
-    void (async () => {
-      const isMetaMaskFlask = await isMetaMaskFlaskAvailable();
-      if (!isMetaMaskFlask) return;
-      const isInstalled = await isSnapInstalled(snapOrigin, version);
-      setIsMetaMaskFlask(isMetaMaskFlask);
-      setSnapInstalled(isInstalled);
-    })();
   }, [snapInstalled]);
 
-  return { isMetaMaskFlask, snapInstalled, enable, address };
+  return { isMetaMaskFlask, snapInstalled, checksCompleted, enable, address };
 }

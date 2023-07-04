@@ -9,10 +9,10 @@ export function Root(): JSX.Element {
   const snap = useSnap();
 
   if (!isWasmReady) {
-    return <Spin />;
+    return <Spin size="large" />;
   }
 
-  if (!snap.snapInstalled) {
+  if (!snap.snapInstalled && snap.checksCompleted) {
     return <AddSnap snap={snap} />;
   }
 
