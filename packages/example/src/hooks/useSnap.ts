@@ -6,11 +6,10 @@ import {
 import { MetamaskRpcRequest } from '@chainsafe/aleo-snap-shared';
 import { useCallback, useEffect, useState } from 'react';
 
-const isDev = import.meta.env.VITE_APP_IS_DEV;
+const isDev = import.meta.env.DEV;
 const snapOrigin = isDev
   ? import.meta.env.VITE_APP_SNAP_ORIGIN_LOCAL
-  : import.meta.env.VITE_APP_SNAP_ORIGIN_LOCAL;
-const version = import.meta.env.VITE_APP_SNAP_VERSION_NPM;
+  : import.meta.env.VITE_APP_SNAP_ORIGIN_NPM;
 type aleoSnapOriginKey = typeof snapOrigin;
 
 declare global {
@@ -54,7 +53,7 @@ export function useSnap(): ISnap {
     void (async () => {
       const isMetaMaskFlask = await isMetaMaskFlaskAvailable();
       if (!isMetaMaskFlask) return;
-      const isInstalled = await isSnapInstalled(snapOrigin, version);
+      const isInstalled = await isSnapInstalled(snapOrigin);
       setChecksCompleted(true);
       setIsMetaMaskFlask(isMetaMaskFlask);
       setSnapInstalled(isInstalled);

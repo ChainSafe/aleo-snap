@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build:local": "tsc && vite build --mode snaporiginlocal",
     "preview": "vite preview",
     "lint": "yarn run lint:style && yarn run lint:types",
     "lint:fix": "yarn run lint:fix:style && yarn run lint:fix:code",
