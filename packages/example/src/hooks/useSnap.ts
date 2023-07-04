@@ -3,7 +3,7 @@ import {
   isMetaMaskFlaskAvailable,
   AleoSnap,
 } from '@chainsafe/aleo-snap-adapter';
-import { AleoSnapApi, MetamaskRpcRequest } from '@chainsafe/aleo-snap-shared';
+import { MetamaskRpcRequest } from '@chainsafe/aleo-snap-shared';
 import { useCallback, useEffect, useState } from 'react';
 
 const isDev = true;
@@ -24,13 +24,13 @@ export interface ISnap {
   isMetaMaskFlask: boolean;
   snapInstalled: boolean;
   enable: () => Promise<void>;
-  aleoSnapApi: AleoSnapApi | null;
+  address: string;
 }
 
 export function useSnap(): ISnap {
   const [isMetaMaskFlask, setIsMetaMaskFlask] = useState(false);
   const [snapInstalled, setSnapInstalled] = useState(false);
-  const [aleoSnapApi, setAleoSnapApi] = useState<AleoSnapApi | null>(null);
+  const [address, setAddress] = useState<string>('');
 
   const enable = useCallback(async () => {
     if (!isMetaMaskFlask) return;
@@ -43,22 +43,27 @@ export function useSnap(): ISnap {
       },
     });
     setSnapInstalled(result[snapOrigin].enabled);
-
-    const AleoSnapInstance = new AleoSnap(snapOrigin);
-    const aleoSnapApi = await AleoSnapInstance.getAleoSnapApi();
-    setAleoSnapApi(aleoSnapApi);
   }, [isMetaMaskFlask]);
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    (async () => {
+    if (snapInstalled) {
+      void (async () => {
+        const AleoSnapInstance = new AleoSnap(snapOrigin);
+        const aleoSnapApi = await AleoSnapInstance.getAleoSnapApi();
+        const address = await aleoSnapApi.getAccount();
+        setAddress(address);
+        return;
+      })();
+      return;
+    }
+    void (async () => {
       const isMetaMaskFlask = await isMetaMaskFlaskAvailable();
       if (!isMetaMaskFlask) return;
       const isInstalled = await isSnapInstalled(snapOrigin, version);
       setIsMetaMaskFlask(isMetaMaskFlask);
       setSnapInstalled(isInstalled);
     })();
-  }, []);
+  }, [snapInstalled]);
 
-  return { isMetaMaskFlask, snapInstalled, enable, aleoSnapApi };
+  return { isMetaMaskFlask, snapInstalled, enable, address };
 }

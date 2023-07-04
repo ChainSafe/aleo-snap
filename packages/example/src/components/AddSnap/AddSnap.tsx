@@ -11,8 +11,7 @@ export const AddSnap: FC<IAddSnap> = ({ snap }) => {
 
   //initial spinner for better UX while isMetaMaskFlaskAvailable function promise race finishes
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    (async () => {
+    void (async () => {
       return await new Promise<void>(() =>
         setTimeout(() => {
           setInitialSpinner(false);
@@ -29,8 +28,7 @@ export const AddSnap: FC<IAddSnap> = ({ snap }) => {
       {!snap.isMetaMaskFlask && !initialSpinner && (
         <Result status="warning" title="Metamask Flask not installed" />
       )}
-      {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
-      <Button disabled={!snap.isMetaMaskFlask} onClick={snap.enable}>
+      <Button disabled={!snap.isMetaMaskFlask} onClick={() => void snap.enable()}>
         Add Snap
       </Button>
     </div>
