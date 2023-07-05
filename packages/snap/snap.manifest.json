@@ -7,7 +7,7 @@
     "url": "git+https://github.com/chainsafe/aleo-snap.git"
   },
   "source": {
-    "shasum": "5EM0DeAiUnV1x5PTlWEGz/rcoBQLg6OEbpgAosoPs9I=",
+    "shasum": "YCXhXipdAM6dyyOWw5/uCsxo4CzUwabBK/9T6d2m27M=",
     "location": {
       "npm": {
         "filePath": "./dist/bundle.js",

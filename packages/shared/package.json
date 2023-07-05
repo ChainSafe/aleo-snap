@@ -1,14 +1,14 @@
 {
   "name": "@chainsafe/aleo-snap-shared",
   "version": "0.0.1",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "typings": "dist/esm/index.d.ts",
   "author": "chainsafe <info@chainsafe.io>",
   "scripts": {
-    "build": "tsc --build"
+    "build": "tsc --build && tsc --build tsconfig.cjs.json"
   },
-  "description": "Types for Aleo snap.",
+  "description": "Shared for Aleo snap.",
   "keywords": [
     "Aleo",
     "metamask",

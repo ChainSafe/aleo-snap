@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build:local": "tsc && vite build --mode snaporiginlocal",
     "preview": "vite preview",
     "lint": "yarn run lint:style && yarn run lint:types",
     "lint:fix": "yarn run lint:fix:style && yarn run lint:fix:code",
@@ -18,6 +19,7 @@
     "@aleohq/sdk": "^0.4.3",
     "@ant-design/icons": "^5",
     "@chainsafe/aleo-snap-adapter": "workspace:^",
+    "@chainsafe/aleo-snap-shared": "workspace:^",
     "@chainsafe/aleo-snap-wasm": "workspace:^",
     "antd": "^5",
     "copy-to-clipboard": "^3.3.3",

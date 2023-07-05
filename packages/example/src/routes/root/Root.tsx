@@ -1,15 +1,20 @@
 import { Outlet } from 'react-router-dom';
+import { Spin } from 'antd';
 import { useWasm } from '../../hooks/useWasm.ts';
+import { AddSnap } from '../../components/AddSnap/AddSnap.tsx';
+import { useSnap } from '../../hooks/useSnap.ts';
 
 export function Root(): JSX.Element {
-  const isReady = useWasm();
+  const isWasmReady = useWasm();
+  const snap = useSnap();
 
-  if (!isReady) return <div />;
+  if (!isWasmReady) {
+    return <Spin size="large" />;
+  }
 
-  /*if (false) {
-    return <h1>Fail</h1>;
-    // return <Navigate to="/connect" replace={true} />;
-  }*/
+  if (!snap.snapInstalled && snap.checksCompleted) {
+    return <AddSnap snap={snap} />;
+  }
 
   return <Outlet />;
 }

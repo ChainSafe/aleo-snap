@@ -5674,6 +5674,7 @@ __metadata:
     "@aleohq/sdk": ^0.4.3
     "@ant-design/icons": ^5
     "@chainsafe/aleo-snap-adapter": "workspace:^"
+    "@chainsafe/aleo-snap-shared": "workspace:^"
     "@chainsafe/aleo-snap-wasm": "workspace:^"
     "@chainsafe/eslint-config": ^1.1.0
     "@types/prettier": ^2

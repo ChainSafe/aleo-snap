@@ -3,6 +3,7 @@ import CountUp from 'react-countup';
 import { valueType } from 'antd/es/statistic/utils';
 import { CopyButton, formLayout } from '../utils';
 import { useLatestBlockHeight } from '../../hooks/useLatestBlockHeight.ts';
+import { useSnap } from '../../hooks/useSnap.ts';
 
 const formatter = (value: valueType): JSX.Element => (
   <CountUp end={Number(value)} separator="," preserveValue />
@@ -10,6 +11,7 @@ const formatter = (value: valueType): JSX.Element => (
 
 export function AccountInfo(): JSX.Element {
   const block = useLatestBlockHeight();
+  const { address } = useSnap();
 
   return (
     <Card
@@ -47,9 +49,9 @@ export function AccountInfo(): JSX.Element {
           <Input
             size="large"
             placeholder="Signature"
-            value={'addr'}
-            addonAfter={<CopyButton data={'signature'} />}
-            disabled
+            value={address}
+            addonAfter={<CopyButton data={address} />}
+            disabled={!address}
           />
         </Form.Item>
         <Form.Item label="View Key" colon={false} style={{ marginBottom: 0 }}>
