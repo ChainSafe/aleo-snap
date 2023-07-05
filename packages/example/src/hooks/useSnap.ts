@@ -3,7 +3,7 @@ import {
   isMetaMaskFlaskAvailable,
   AleoSnap,
 } from '@chainsafe/aleo-snap-adapter';
-import { MetamaskRpcRequest } from '@chainsafe/aleo-snap-shared';
+import { AleoSnapApi, MetamaskRpcRequest } from '@chainsafe/aleo-snap-shared';
 import { useCallback, useEffect, useState } from 'react';
 
 const isDev = import.meta.env.DEV;
@@ -27,13 +27,17 @@ export interface ISnap {
   checksCompleted: boolean;
   enable: () => Promise<void>;
   address: string;
+  showViewKey: () => Promise<void>;
+  viewKey: string;
 }
 
 export function useSnap(): ISnap {
   const [isMetaMaskFlask, setIsMetaMaskFlask] = useState(false);
   const [snapInstalled, setSnapInstalled] = useState(false);
   const [checksCompleted, setChecksCompleted] = useState(false);
+  const [aleoSnapApi, setAleoSnapApi] = useState<AleoSnapApi | null>(null);
   const [address, setAddress] = useState<string>('');
+  const [viewKey, setViewKey] = useState<string>('');
 
   const enable = useCallback(async () => {
     if (!isMetaMaskFlask) return;
@@ -47,6 +51,12 @@ export function useSnap(): ISnap {
     });
     setSnapInstalled(result[snapOrigin].enabled);
   }, [isMetaMaskFlask]);
+
+  const showViewKey = useCallback(async () => {
+    if (!aleoSnapApi) return;
+    const viewKey = await aleoSnapApi.getViewKey();
+    setViewKey(viewKey);
+  }, [aleoSnapApi]);
 
   //initial checks
   useEffect(() => {
@@ -66,6 +76,7 @@ export function useSnap(): ISnap {
       void (async () => {
         const AleoSnapInstance = new AleoSnap(snapOrigin);
         const aleoSnapApi = await AleoSnapInstance.getAleoSnapApi();
+        setAleoSnapApi(aleoSnapApi);
         const address = await aleoSnapApi.getAccount();
         setAddress(address);
         return;
@@ -74,5 +85,13 @@ export function useSnap(): ISnap {
     }
   }, [snapInstalled]);
 
-  return { isMetaMaskFlask, snapInstalled, checksCompleted, enable, address };
+  return {
+    isMetaMaskFlask,
+    snapInstalled,
+    checksCompleted,
+    enable,
+    address,
+    showViewKey,
+    viewKey,
+  };
 }
