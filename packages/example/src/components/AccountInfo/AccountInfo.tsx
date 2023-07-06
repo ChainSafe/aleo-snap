@@ -11,7 +11,7 @@ const formatter = (value: valueType): JSX.Element => (
 
 export function AccountInfo(): JSX.Element {
   const block = useLatestBlockHeight();
-  const { address, showViewKey, viewKey } = useSnap();
+  const { address, showViewKey, viewKey, balance, getBalance } = useSnap();
 
   return (
     <Card
@@ -19,14 +19,14 @@ export function AccountInfo(): JSX.Element {
       style={{ width: '100%', borderRadius: '20px' }}
       bordered={false}
     >
-      <Row gutter={16}>
+      <Row align={'middle'} gutter={16}>
         <Col span={6}>
-          <Statistic title="Balance" value={112893} formatter={formatter} />
+          <Statistic title="Balance" value={balance?.balance} formatter={formatter} />
         </Col>
         <Col span={6}>
           <Statistic
-            title="Current Block"
-            value={112893}
+            title="Latest Sync Block"
+            value={balance?.latestSyncBlock}
             precision={2}
             formatter={formatter}
           />
@@ -40,7 +40,9 @@ export function AccountInfo(): JSX.Element {
           />
         </Col>
         <Col span={6}>
-          <Statistic title="Status" value={'syncing'} />
+          <Button type="default" size="large" onClick={() => void getBalance()}>
+            {balance === null ? 'Get Balance' : 'Refresh Balance'}
+          </Button>
         </Col>
       </Row>
       <Divider />

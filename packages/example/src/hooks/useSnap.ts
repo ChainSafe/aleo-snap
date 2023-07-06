@@ -3,7 +3,7 @@ import {
   isMetaMaskFlaskAvailable,
   AleoSnap,
 } from '@chainsafe/aleo-snap-adapter';
-import { AleoSnapApi, MetamaskRpcRequest } from '@chainsafe/aleo-snap-shared';
+import { AleoSnapApi, Balance, MetamaskRpcRequest } from '@chainsafe/aleo-snap-shared';
 import { useCallback, useEffect, useState } from 'react';
 
 const isDev = import.meta.env.DEV;
@@ -27,6 +27,8 @@ export interface ISnap {
   checksCompleted: boolean;
   enable: () => Promise<void>;
   address: string;
+  getBalance: () => Promise<void>;
+  balance: Balance | null;
   showViewKey: () => Promise<void>;
   viewKey: string;
 }
@@ -38,6 +40,7 @@ export function useSnap(): ISnap {
   const [aleoSnapApi, setAleoSnapApi] = useState<AleoSnapApi | null>(null);
   const [address, setAddress] = useState<string>('');
   const [viewKey, setViewKey] = useState<string>('');
+  const [balance, setBalance] = useState<Balance | null>(null);
 
   const enable = useCallback(async () => {
     if (!isMetaMaskFlask) return;
@@ -56,6 +59,12 @@ export function useSnap(): ISnap {
     if (!aleoSnapApi) return;
     const viewKey = await aleoSnapApi.getViewKey();
     setViewKey(viewKey);
+  }, [aleoSnapApi]);
+
+  const getBalance = useCallback(async () => {
+    if (!aleoSnapApi) return;
+    const balance = await aleoSnapApi.getBalance();
+    setBalance(balance);
   }, [aleoSnapApi]);
 
   //initial checks
@@ -93,5 +102,7 @@ export function useSnap(): ISnap {
     address,
     showViewKey,
     viewKey,
+    getBalance,
+    balance,
   };
 }
