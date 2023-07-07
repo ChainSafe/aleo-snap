@@ -60,7 +60,7 @@ export function AccountInfo(): JSX.Element {
           <Form.Item style={{ display: 'inline-block', width: 'calc(100% - 88px)' }}>
             <Input
               size="large"
-              placeholder="Hidden View Key"
+              placeholder="*****************************************************"
               value={viewKey}
               addonAfter={viewKey && <CopyButton data={viewKey} />}
               disabled={!viewKey}
