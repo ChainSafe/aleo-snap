@@ -11,7 +11,7 @@ const formatter = (value: valueType): JSX.Element => (
 
 export function AccountInfo(): JSX.Element {
   const block = useLatestBlockHeight();
-  const { address } = useSnap();
+  const { address, showViewKey, viewKey, balance, getBalance } = useSnap();
 
   return (
     <Card
@@ -19,14 +19,14 @@ export function AccountInfo(): JSX.Element {
       style={{ width: '100%', borderRadius: '20px' }}
       bordered={false}
     >
-      <Row gutter={16}>
+      <Row align={'middle'} gutter={16}>
         <Col span={6}>
-          <Statistic title="Balance" value={112893} formatter={formatter} />
+          <Statistic title="Balance" value={balance?.balance} formatter={formatter} />
         </Col>
         <Col span={6}>
           <Statistic
-            title="Current Block"
-            value={112893}
+            title="Latest Sync Block"
+            value={balance?.latestSyncBlock}
             precision={2}
             formatter={formatter}
           />
@@ -40,7 +40,9 @@ export function AccountInfo(): JSX.Element {
           />
         </Col>
         <Col span={6}>
-          <Statistic title="Status" value={'syncing'} />
+          <Button type="default" size="large" onClick={() => void getBalance()}>
+            {balance === null ? 'Get Balance' : 'Refresh Balance'}
+          </Button>
         </Col>
       </Row>
       <Divider />
@@ -48,52 +50,27 @@ export function AccountInfo(): JSX.Element {
         <Form.Item label="Address" colon={false}>
           <Input
             size="large"
-            placeholder="Signature"
+            placeholder="loading address..."
             value={address}
             addonAfter={<CopyButton data={address} />}
             disabled={!address}
           />
         </Form.Item>
         <Form.Item label="View Key" colon={false} style={{ marginBottom: 0 }}>
-          <Form.Item
-            name="wk"
-            style={{ display: 'inline-block', width: 'calc(100% - 88px)' }}
-          >
+          <Form.Item style={{ display: 'inline-block', width: 'calc(100% - 88px)' }}>
             <Input
               size="large"
-              placeholder="Signature"
-              value={'pkaaaa'}
-              addonAfter={<CopyButton data={'signature'} />}
-              disabled
+              placeholder="*****************************************************"
+              value={viewKey}
+              addonAfter={viewKey && <CopyButton data={viewKey} />}
+              disabled={!viewKey}
             />
           </Form.Item>
           <Form.Item
-            name="wkb"
+            name="vkb"
             style={{ display: 'inline-block', width: '80px', margin: '0 0 0 8px' }}
           >
-            <Button size="large" style={{ width: 80 }} onClick={() => {}}>
-              Show
-            </Button>
-          </Form.Item>
-        </Form.Item>
-        <Form.Item label="Private Key" colon={false} style={{ marginBottom: 0 }}>
-          <Form.Item
-            name="pk"
-            style={{ display: 'inline-block', width: 'calc(100% - 88px)' }}
-          >
-            <Input
-              size="large"
-              placeholder="Signature"
-              value={'pkaaaa'}
-              addonAfter={<CopyButton data={'signature'} />}
-              disabled
-            />
-          </Form.Item>
-          <Form.Item
-            name="pkw"
-            style={{ display: 'inline-block', width: '80px', margin: '0 0 0 8px' }}
-          >
-            <Button size="large" style={{ width: 80 }} onClick={() => {}}>
+            <Button size="large" style={{ width: 80 }} onClick={() => void showViewKey()}>
               Show
             </Button>
           </Form.Item>
