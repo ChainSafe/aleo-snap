@@ -37,7 +37,8 @@ describe("Test rpc handler function: sign", function () {
       "Hello world!"
     );
 
-    expect(signResponse).to.be.eql({ ptr: 1237248 });
+    expect(signResponse.length).to.be.eql(216);
+    expect(signResponse.slice(0, 4)).to.be.eql("sign");
   });
 
   it("should fail if dialog wasn't accepted", async function () {

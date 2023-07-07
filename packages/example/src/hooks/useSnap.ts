@@ -31,6 +31,10 @@ export interface ISnap {
   balance: Balance | null;
   showViewKey: () => Promise<void>;
   viewKey: string;
+  signMessage: (message: string) => Promise<void>;
+  signature: string;
+  verifyMessage: (message: string, signature: string) => Promise<void>;
+  isMessageVerified: boolean | null;
 }
 
 export function useSnap(): ISnap {
@@ -41,6 +45,8 @@ export function useSnap(): ISnap {
   const [address, setAddress] = useState<string>('');
   const [viewKey, setViewKey] = useState<string>('');
   const [balance, setBalance] = useState<Balance | null>(null);
+  const [signature, setSignature] = useState<string>('');
+  const [isMessageVerified, setIsMessageVerified] = useState<boolean | null>(null);
 
   const enable = useCallback(async () => {
     if (!isMetaMaskFlask) return;
@@ -66,6 +72,29 @@ export function useSnap(): ISnap {
     const balance = await aleoSnapApi.getBalance();
     setBalance(balance);
   }, [aleoSnapApi]);
+
+  const signMessage = useCallback(
+    async (message: string) => {
+      if (!aleoSnapApi) return;
+      const signature = await aleoSnapApi.sign(message);
+      setSignature(signature);
+    },
+    [aleoSnapApi],
+  );
+
+  const verifyMessage = useCallback(
+    async (message: string, signature: string) => {
+      if (!aleoSnapApi) return;
+      try {
+        const isVerified = await aleoSnapApi.verify(message, signature);
+        setIsMessageVerified(isVerified);
+      } catch (e) {
+        setIsMessageVerified(false);
+        throw e;
+      }
+    },
+    [aleoSnapApi],
+  );
 
   //initial checks
   useEffect(() => {
@@ -104,5 +133,9 @@ export function useSnap(): ISnap {
     viewKey,
     getBalance,
     balance,
+    signMessage,
+    signature,
+    verifyMessage,
+    isMessageVerified,
   };
 }
