@@ -106,9 +106,12 @@ describe("Integration tests", function () {
       );
 
       await metaMask.snaps.dialog.accept();
-
-      expect(await invokeAction).to.deep.eq(
-        { ptr: 1237968 }
+      const result = await invokeAction;
+      expect((result as string).length).to.deep.eq(
+        216
+      );
+      expect((result as string).slice(0,4)).to.deep.eq(
+        "sign"
       );
     });
 

@@ -1,7 +1,3 @@
-import type { Signature } from "@chainsafe/aleo-snap-wasm";
-
-export type { Signature } from "@chainsafe/aleo-snap-wasm";
-
 export enum Methods {
   GetAccount = "aleo_getAccount",
   GetViewKey = "aleo_getViewKey",
@@ -91,7 +87,7 @@ export interface AleoSnapApi {
   getAccount(): Promise<string>;
   getViewKey(): Promise<string>;
   decrypt(cipherText: string, viewKey?: string): Promise<string>;
-  sign(message: string): Promise<Signature>;
+  sign(message: string): Promise<string>;
   verify(message: string, signature: string): Promise<boolean>;
   getBalance(): Promise<Balance>;
   getRecords(): Promise<Records>;
