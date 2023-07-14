@@ -1,9 +1,4 @@
-import {
-  Balance,
-  Methods,
-  Records,
-  Signature,
-} from "@chainsafe/aleo-snap-shared";
+import { Balance, Methods, Records } from "@chainsafe/aleo-snap-shared";
 import { AleoSnap } from "./snap";
 
 async function sendSnapMethod<T>(
@@ -44,10 +39,7 @@ export async function decrypt(
   );
 }
 
-export async function sign(
-  this: AleoSnap,
-  message: string
-): Promise<Signature> {
+export async function sign(this: AleoSnap, message: string): Promise<string> {
   return await sendSnapMethod(
     {
       method: Methods.Sign,
