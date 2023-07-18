@@ -1,6 +1,7 @@
 export enum Methods {
   GetAccount = "aleo_getAccount",
   GetViewKey = "aleo_getViewKey",
+  GetPrivateKey = "aleo_getPrivateKey",
   Decrypt = "aleo_decrypt",
   Sign = "aleo_sign",
   Verify = "aleo_verify",
@@ -15,6 +16,10 @@ export interface GetAccountRequest {
 
 export interface GetViewKeyRequest {
   method: "aleo_getViewKey";
+}
+
+export interface GetPrivateKeyRequest {
+  method: "aleo_getPrivateKey";
 }
 
 export interface DecryptRequest {
@@ -55,6 +60,7 @@ export interface SyncRecordsRequest {
 export type AleoSnapRpcRequest =
   | GetAccountRequest
   | GetViewKeyRequest
+  | GetPrivateKeyRequest
   | DecryptRequest
   | SignRequest
   | VerifyRequest
@@ -86,6 +92,7 @@ export type MetamaskRpcRequest =
 export interface AleoSnapApi {
   getAccount(): Promise<string>;
   getViewKey(): Promise<string>;
+  getPrivateKey(): Promise<string>;
   decrypt(cipherText: string, viewKey?: string): Promise<string>;
   sign(message: string): Promise<string>;
   verify(message: string, signature: string): Promise<boolean>;

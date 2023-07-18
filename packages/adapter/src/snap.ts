@@ -8,6 +8,7 @@ import {
   syncRecords,
   getBalance,
   getRecords,
+  getPrivateKey,
 } from "./methods";
 
 export class AleoSnap {
@@ -24,6 +25,7 @@ export class AleoSnap {
     return {
       getAccount: getAccount.bind(this),
       getViewKey: getViewKey.bind(this),
+      getPrivateKey: getPrivateKey.bind(this),
       decrypt: decrypt.bind(this),
       sign: sign.bind(this),
       verify: verify.bind(this),
