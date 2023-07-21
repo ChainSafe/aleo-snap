@@ -3,7 +3,12 @@ import {
   isMetaMaskFlaskAvailable,
   AleoSnap,
 } from '@chainsafe/aleo-snap-adapter';
-import { AleoSnapApi, Balance, MetamaskRpcRequest, Records } from '@chainsafe/aleo-snap-shared';
+import {
+  AleoSnapApi,
+  Balance,
+  MetamaskRpcRequest,
+  Records,
+} from '@chainsafe/aleo-snap-shared';
 import { useCallback, useEffect, useState } from 'react';
 
 const isDev = import.meta.env.DEV;
@@ -104,6 +109,9 @@ export function useSnap(): ISnap {
         setIsMessageVerified(false);
         throw e;
       }
+      setTimeout(() => {
+        setIsMessageVerified(null);
+      }, 1000);
     },
     [aleoSnapApi],
   );
@@ -137,7 +145,6 @@ export function useSnap(): ISnap {
         setAddress(address);
         return;
       })();
-      return;
     }
   }, [snapInstalled]);
 
