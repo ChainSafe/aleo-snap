@@ -41,8 +41,7 @@ export function TransferFunds(): JSX.Element {
 
   useEffect(() => {
     if (transferStatus.message) {
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      messageApi.open({
+      void messageApi.open({
         content: transferStatus.message,
         duration: transferStatus.duration,
         type: transferStatus.status,
@@ -62,8 +61,10 @@ export function TransferFunds(): JSX.Element {
       bordered={false}
     >
       {contextHolder}
-      {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
-      <Form {...formLayout} onSubmitCapture={formHook.handleSubmit(onSubmit)}>
+      <Form
+        {...formLayout}
+        onSubmitCapture={() => void formHook.handleSubmit(onSubmit)()}
+      >
         <Form.Item label="Recipient Address" colon={false}>
           {getInput('recipientAddress')}
         </Form.Item>
