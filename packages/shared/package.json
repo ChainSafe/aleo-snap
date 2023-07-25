@@ -1,6 +1,6 @@
 {
   "name": "@chainsafe/aleo-snap-shared",
-  "version": "0.0.1",
+  "version": "1.1.0",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "typings": "dist/esm/index.d.ts",
