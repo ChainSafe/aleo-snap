@@ -22,6 +22,10 @@ export async function getViewKey(this: AleoSnap): Promise<string> {
   return await sendSnapMethod({ method: Methods.GetViewKey }, this.snapId);
 }
 
+export async function getPrivateKey(this: AleoSnap): Promise<string> {
+  return await sendSnapMethod({ method: Methods.GetPrivateKey }, this.snapId);
+}
+
 export async function decrypt(
   this: AleoSnap,
   cipherText: string,

@@ -13,7 +13,7 @@
     "lint:fix": "yarn run lint --fix",
     "serve": "mm-snap serve",
     "test": "yarn run test:unit && yarn run test:integrations",
-    "test:unit": "mocha --colors -r ts-node/register \"test/unit/**/*.test.ts\"",
+    "test:unit": "mocha --timeout 10000 --colors -r ts-node/register \"test/unit/**/*.test.ts\"",
     "test:integrations": "mocha --colors -r ts-node/register \"test/integration/**/*.test.ts\""
   },
   "repository": {

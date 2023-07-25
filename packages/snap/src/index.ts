@@ -11,6 +11,7 @@ import { verify } from "./rpc/verify";
 import { syncRecords } from "./cron/syncRecords";
 import { getRecords } from "./rpc/getRecords";
 import { getBalance } from "./rpc/getBalance";
+import { getPrivateKey } from "./rpc/getPrivateKey";
 
 let wasm: InitOutput;
 
@@ -28,6 +29,9 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
     }
     case Methods.GetViewKey: {
       return await getViewKey(snap, origin);
+    }
+    case Methods.GetPrivateKey: {
+      return await getPrivateKey(snap, origin);
     }
     case Methods.Decrypt: {
       assert(request.params, decryptSchema);

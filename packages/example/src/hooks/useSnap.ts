@@ -3,7 +3,12 @@ import {
   isMetaMaskFlaskAvailable,
   AleoSnap,
 } from '@chainsafe/aleo-snap-adapter';
-import { AleoSnapApi, Balance, MetamaskRpcRequest } from '@chainsafe/aleo-snap-shared';
+import {
+  AleoSnapApi,
+  Balance,
+  MetamaskRpcRequest,
+  Records,
+} from '@chainsafe/aleo-snap-shared';
 import { useCallback, useEffect, useState } from 'react';
 
 const isDev = import.meta.env.DEV;
@@ -31,10 +36,14 @@ export interface ISnap {
   balance: Balance | null;
   showViewKey: () => Promise<void>;
   viewKey: string;
+  showPrivateKey: () => Promise<void>;
+  privateKey: string;
   signMessage: (message: string) => Promise<void>;
   signature: string;
   verifyMessage: (message: string, signature: string) => Promise<void>;
   isMessageVerified: boolean | null;
+  showRecords: () => Promise<void>;
+  records: Records | null;
 }
 
 export function useSnap(): ISnap {
@@ -44,9 +53,11 @@ export function useSnap(): ISnap {
   const [aleoSnapApi, setAleoSnapApi] = useState<AleoSnapApi | null>(null);
   const [address, setAddress] = useState<string>('');
   const [viewKey, setViewKey] = useState<string>('');
+  const [privateKey, setPrivateKey] = useState<string>('');
   const [balance, setBalance] = useState<Balance | null>(null);
   const [signature, setSignature] = useState<string>('');
   const [isMessageVerified, setIsMessageVerified] = useState<boolean | null>(null);
+  const [records, setRecords] = useState<Records | null>(null);
 
   const enable = useCallback(async () => {
     if (!isMetaMaskFlask) return;
@@ -65,6 +76,12 @@ export function useSnap(): ISnap {
     if (!aleoSnapApi) return;
     const viewKey = await aleoSnapApi.getViewKey();
     setViewKey(viewKey);
+  }, [aleoSnapApi]);
+
+  const showPrivateKey = useCallback(async () => {
+    if (!aleoSnapApi) return;
+    const privateKey = await aleoSnapApi.getPrivateKey();
+    setPrivateKey(privateKey);
   }, [aleoSnapApi]);
 
   const getBalance = useCallback(async () => {
@@ -92,9 +109,18 @@ export function useSnap(): ISnap {
         setIsMessageVerified(false);
         throw e;
       }
+      setTimeout(() => {
+        setIsMessageVerified(null);
+      }, 1000);
     },
     [aleoSnapApi],
   );
+
+  const showRecords = useCallback(async () => {
+    if (!aleoSnapApi) return;
+    const records = await aleoSnapApi.getRecords();
+    setRecords(records);
+  }, [aleoSnapApi]);
 
   //initial checks
   useEffect(() => {
@@ -119,7 +145,6 @@ export function useSnap(): ISnap {
         setAddress(address);
         return;
       })();
-      return;
     }
   }, [snapInstalled]);
 
@@ -131,11 +156,15 @@ export function useSnap(): ISnap {
     address,
     showViewKey,
     viewKey,
+    showPrivateKey,
+    privateKey,
     getBalance,
     balance,
     signMessage,
     signature,
     verifyMessage,
     isMessageVerified,
+    showRecords,
+    records,
   };
 }

@@ -45,20 +45,25 @@ export class ExecutionResponse {
   getOutputs(): Array<any>;
 }
 /**
-* Webassembly Representation of an Aleo function fee execution response
-*
-* This object is returned by the execution of the `fee` function in credits.aleo. If a fee is
-* specified when attempting to create an on-chain program execution transaction, this will be
-* required as part of the transaction. However, it can be executed in parallel to execution of
-* main program in separate web workers prior to creation of the transaction.
 */
-export class FeeExecution {
+export class KeyPair {
   free(): void;
 /**
-* Get the amount of the fee
-* @returns {bigint}
+* Create new key pair from proving and verifying keys
+* @param {ProvingKey} proving_key
+* @param {VerifyingKey} verifying_key
 */
-  fee(): bigint;
+  constructor(proving_key: ProvingKey, verifying_key: VerifyingKey);
+/**
+* Get the proving key
+* @returns {ProvingKey}
+*/
+  provingKey(): ProvingKey;
+/**
+* Get the verifying key
+* @returns {VerifyingKey}
+*/
+  verifyingKey(): VerifyingKey;
 }
 /**
 */
@@ -207,6 +212,287 @@ export class Program {
 * @returns {Array<any>}
 */
   getStructMembers(struct_name: string): Array<any>;
+/**
+* Get the credits.aleo program
+* @returns {Program}
+*/
+  static getCreditsProgram(): Program;
+/**
+* Get the id of the program
+* @returns {string}
+*/
+  id(): string;
+/**
+* Determine equality with another program
+* @param {Program} other
+* @returns {boolean}
+*/
+  isEqual(other: Program): boolean;
+}
+/**
+*/
+export class ProgramManager {
+  free(): void;
+/**
+* Execute an arbitrary function locally
+*
+* @param private_key The private key of the sender
+* @param program The source code of the program being executed
+* @param function The name of the function to execute
+* @param inputs A javascript array of inputs to the function
+* @param amount_record The record to fund the amount from
+* @param fee_credits The amount of credits to pay as a fee
+* @param fee_record The record to spend the fee from
+* @param url The url of the Aleo network node to send the transaction to
+* @param cache Cache the proving and verifying keys in the ProgramManager's memory.
+* If this is set to 'true' the keys synthesized (or passed in as optional parameters via the
+* `proving_key` and `verifying_key` arguments) will be stored in the ProgramManager's memory
+* and used for subsequent transactions. If this is set to 'false' the proving and verifying
+* keys will be deallocated from memory after the transaction is executed.
+* @param proving_key (optional) Provide a verifying key to use for the function execution
+* @param verifying_key (optional) Provide a verifying key to use for the function execution
+* @param {PrivateKey} private_key
+* @param {string} program
+* @param {string} _function
+* @param {Array<any>} inputs
+* @param {boolean} cache
+* @param {ProvingKey | undefined} proving_key
+* @param {VerifyingKey | undefined} verifying_key
+* @returns {ExecutionResponse}
+*/
+  execute_local(private_key: PrivateKey, program: string, _function: string, inputs: Array<any>, cache: boolean, proving_key?: ProvingKey, verifying_key?: VerifyingKey): ExecutionResponse;
+/**
+* Execute Aleo function and create an Aleo execution transaction
+*
+* @param private_key The private key of the sender
+* @param program The source code of the program being executed
+* @param function The name of the function to execute
+* @param inputs A javascript array of inputs to the function
+* @param fee_credits The amount of credits to pay as a fee
+* @param fee_record The record to spend the fee from
+* @param url The url of the Aleo network node to send the transaction to
+* @param cache Cache the proving and verifying keys in the ProgramManager's memory.
+* If this is set to 'true' the keys synthesized (or passed in as optional parameters via the
+* `proving_key` and `verifying_key` arguments) will be stored in the ProgramManager's memory
+* and used for subsequent transactions. If this is set to 'false' the proving and verifying
+* keys will be deallocated from memory after the transaction is executed.
+* @param proving_key (optional) Provide a verifying key to use for the function execution
+* @param verifying_key (optional) Provide a verifying key to use for the function execution
+* @param fee_proving_key (optional) Provide a proving key to use for the fee execution
+* @param fee_verifying_key (optional) Provide a verifying key to use for the fee execution
+* @param {PrivateKey} private_key
+* @param {string} program
+* @param {string} _function
+* @param {Array<any>} inputs
+* @param {number} fee_credits
+* @param {RecordPlaintext} fee_record
+* @param {string} url
+* @param {boolean} cache
+* @param {ProvingKey | undefined} proving_key
+* @param {VerifyingKey | undefined} verifying_key
+* @param {ProvingKey | undefined} fee_proving_key
+* @param {VerifyingKey | undefined} fee_verifying_key
+* @returns {Promise<Transaction>}
+*/
+  execute(private_key: PrivateKey, program: string, _function: string, inputs: Array<any>, fee_credits: number, fee_record: RecordPlaintext, url: string, cache: boolean, proving_key?: ProvingKey, verifying_key?: VerifyingKey, fee_proving_key?: ProvingKey, fee_verifying_key?: VerifyingKey): Promise<Transaction>;
+/**
+*/
+  constructor();
+/**
+* Cache the proving and verifying keys for a program function in WASM memory. This method
+* will take a verifying and proving key and store them in the program manager's internal
+* in-memory cache. This memory is allocated in WebAssembly, so it is important to be mindful
+* of the amount of memory being used. This method will return an error if the keys are already
+* cached in memory.
+*
+* @param program_id The name of the program containing the desired function
+* @param function The name of the function to store the keys for
+* @param proving_key The proving key of the function
+* @param verifying_key The verifying key of the function
+* @param {string} program
+* @param {string} _function
+* @param {ProvingKey} proving_key
+* @param {VerifyingKey} verifying_key
+*/
+  cacheKeypairInWasmMemory(program: string, _function: string, proving_key: ProvingKey, verifying_key: VerifyingKey): void;
+/**
+* Get the proving & verifying keys cached in WASM memory for a specific function
+*
+* @param program_id The name of the program containing the desired function
+* @param function_id The name of the function to retrieve the keys for
+* @param {string} program_id
+* @param {string} _function
+* @returns {KeyPair}
+*/
+  getCachedKeypair(program_id: string, _function: string): KeyPair;
+/**
+* Synthesize a proving and verifying key for a program function. This method should be used
+* when there is a need to pre-synthesize keys (i.e. for caching purposes, etc.)
+*
+* @param program The source code of the program containing the desired function
+* @param function The name of the function to synthesize the key for
+* @param {string} program
+* @param {string} _function
+* @returns {KeyPair}
+*/
+  synthesizeKeypair(program: string, _function: string): KeyPair;
+/**
+* Clear key cache in wasm memory.
+*
+* This method will clear the key cache in wasm memory. It is important to note that this will
+* not DE-allocate the memory assigned to wasm as wasm memory cannot be shrunk. The total
+* memory allocated to wasm will remain constant but will be available for other usage after
+* calling this method.
+*/
+  clearKeyCache(): void;
+/**
+* Check if the cache contains a keypair for a specific function
+*
+* @param program_id The name of the program containing the desired function
+* @param function_id The name of the function to retrieve the keys for
+* @param {string} program_id
+* @param {string} function_id
+* @returns {boolean}
+*/
+  keyExists(program_id: string, function_id: string): boolean;
+/**
+* Send credits from one Aleo account to another
+*
+* @param private_key The private key of the sender
+* @param amount_credits The amount of credits to send
+* @param recipient The recipient of the transaction
+* @param transfer_type The type of the transfer (options: "private", "public", "private_to_public", "public_to_private")
+* @param amount_record The record to fund the amount from
+* @param fee_credits The amount of credits to pay as a fee
+* @param fee_record The record to spend the fee from
+* @param url The url of the Aleo network node to send the transaction to
+* @param cache Cache the proving and verifying keys in the ProgramManager memory. If this is
+* set to `true` the keys synthesized (or passed in as optional parameters via the
+* `transfer_proving_key` and `transfer_verifying_key` arguments) will be stored in the
+* ProgramManager's memory and used for subsequent transactions. If this is set to `false` the
+* proving and verifying keys will be deallocated from memory after the transaction is executed
+* @param transfer_proving_key (optional) Provide a proving key to use for the transfer
+* function
+* @param transfer_verifying_key (optional) Provide a verifying key to use for the transfer
+* function
+* @param fee_proving_key (optional) Provide a proving key to use for the fee execution
+* @param fee_verifying_key (optional) Provide a verifying key to use for the fee execution
+* @param {PrivateKey} private_key
+* @param {number} amount_credits
+* @param {string} recipient
+* @param {string} transfer_type
+* @param {RecordPlaintext | undefined} amount_record
+* @param {number} fee_credits
+* @param {RecordPlaintext} fee_record
+* @param {string} url
+* @param {boolean} cache
+* @param {ProvingKey | undefined} transfer_proving_key
+* @param {VerifyingKey | undefined} transfer_verifying_key
+* @param {ProvingKey | undefined} fee_proving_key
+* @param {VerifyingKey | undefined} fee_verifying_key
+* @returns {Promise<Transaction>}
+*/
+  transfer(private_key: PrivateKey, amount_credits: number, recipient: string, transfer_type: string, amount_record: RecordPlaintext | undefined, fee_credits: number, fee_record: RecordPlaintext, url: string, cache: boolean, transfer_proving_key?: ProvingKey, transfer_verifying_key?: VerifyingKey, fee_proving_key?: ProvingKey, fee_verifying_key?: VerifyingKey): Promise<Transaction>;
+/**
+* Split an Aleo credits record into two separate records. This function does not require a fee.
+*
+* @param private_key The private key of the sender
+* @param split_amount The amount of the credit split. This amount will be subtracted from the
+* value of the record and two new records will be created with the split amount and the remainder
+* @param amount_record The record to split
+* @param url The url of the Aleo network node to send the transaction to
+* @param cache Cache the proving and verifying keys in the ProgramManager memory. If this is
+* set to `true` the keys synthesized (or passed in as optional parameters via the
+* `split_proving_key` and `split_verifying_key` arguments) will be stored in the
+* ProgramManager's memory and used for subsequent transactions. If this is set to `false` the
+* proving and verifying keys will be deallocated from memory after the transaction is executed
+* @param split_proving_key (optional) Provide a proving key to use for the split function
+* @param split_verifying_key (optional) Provide a verifying key to use for the split function
+* @param {PrivateKey} private_key
+* @param {number} split_amount
+* @param {RecordPlaintext} amount_record
+* @param {string} url
+* @param {boolean} cache
+* @param {ProvingKey | undefined} split_proving_key
+* @param {VerifyingKey | undefined} split_verifying_key
+* @returns {Promise<Transaction>}
+*/
+  split(private_key: PrivateKey, split_amount: number, amount_record: RecordPlaintext, url: string, cache: boolean, split_proving_key?: ProvingKey, split_verifying_key?: VerifyingKey): Promise<Transaction>;
+/**
+* Deploy an Aleo program
+*
+* @param private_key The private key of the sender
+* @param program The source code of the program being deployed
+* @param imports A javascript object holding the source code of any imported programs in the
+* form {"program_name1": "program_source_code", "program_name2": "program_source_code", ..}.
+* Note that all imported programs must be deployed on chain before the main program in order
+* for the deployment to succeed
+* @param fee_credits The amount of credits to pay as a fee
+* @param fee_record The record to spend the fee from
+* @param url The url of the Aleo network node to send the transaction to
+* @param fee_proving_key (optional) Provide a proving key to use for the fee execution
+* @param fee_verifying_key (optional) Provide a verifying key to use for the fee execution
+* @param {PrivateKey} private_key
+* @param {string} program
+* @param {object | undefined} imports
+* @param {number} fee_credits
+* @param {RecordPlaintext} fee_record
+* @param {string} url
+* @param {boolean} cache
+* @param {ProvingKey | undefined} fee_proving_key
+* @param {VerifyingKey | undefined} fee_verifying_key
+* @returns {Promise<Transaction>}
+*/
+  deploy(private_key: PrivateKey, program: string, imports: object | undefined, fee_credits: number, fee_record: RecordPlaintext, url: string, cache: boolean, fee_proving_key?: ProvingKey, fee_verifying_key?: VerifyingKey): Promise<Transaction>;
+/**
+* Join two records together to create a new record with an amount of credits equal to the sum
+* of the credits of the two original records
+*
+* @param private_key The private key of the sender
+* @param record_1 The first record to combine
+* @param record_2 The second record to combine
+* @param fee_credits The amount of credits to pay as a fee
+* @param fee_record The record to spend the fee from
+* @param url The url of the Aleo network node to send the transaction to
+* @param cache Cache the proving and verifying keys in the ProgramManager memory. If this is
+* set to `true` the keys synthesized (or passed in as optional parameters via the
+* `join_proving_key` and `join_verifying_key` arguments) will be stored in the
+* ProgramManager's memory and used for subsequent transactions. If this is set to `false` the
+* proving and verifying keys will be deallocated from memory after the transaction is executed
+* @param join_proving_key (optional) Provide a proving key to use for the join function
+* @param join_verifying_key (optional) Provide a verifying key to use for the join function
+* @param fee_proving_key (optional) Provide a proving key to use for the fee execution
+* @param fee_verifying_key (optional) Provide a verifying key to use for the fee execution
+* @param {PrivateKey} private_key
+* @param {RecordPlaintext} record_1
+* @param {RecordPlaintext} record_2
+* @param {number} fee_credits
+* @param {RecordPlaintext} fee_record
+* @param {string} url
+* @param {boolean} cache
+* @param {ProvingKey | undefined} join_proving_key
+* @param {VerifyingKey | undefined} join_verifying_key
+* @param {ProvingKey | undefined} fee_proving_key
+* @param {VerifyingKey | undefined} fee_verifying_key
+* @returns {Promise<Transaction>}
+*/
+  join(private_key: PrivateKey, record_1: RecordPlaintext, record_2: RecordPlaintext, fee_credits: number, fee_record: RecordPlaintext, url: string, cache: boolean, join_proving_key?: ProvingKey, join_verifying_key?: VerifyingKey, fee_proving_key?: ProvingKey, fee_verifying_key?: VerifyingKey): Promise<Transaction>;
+}
+/**
+*/
+export class ProvingKey {
+  free(): void;
+/**
+* Construct a new proving key from a byte array
+* @param {Uint8Array} bytes
+* @returns {ProvingKey}
+*/
+  static fromBytes(bytes: Uint8Array): ProvingKey;
+/**
+* Create a byte array from a proving key
+* @returns {Uint8Array}
+*/
+  toBytes(): Uint8Array;
 }
 /**
 * Encrypted Aleo record
@@ -330,6 +616,22 @@ export class Transaction {
 }
 /**
 */
+export class VerifyingKey {
+  free(): void;
+/**
+* Construct a new verifying key from a byte array
+* @param {Uint8Array} bytes
+* @returns {VerifyingKey}
+*/
+  static fromBytes(bytes: Uint8Array): VerifyingKey;
+/**
+* Create a byte array from a verifying key
+* @returns {Uint8Array}
+*/
+  toBytes(): Uint8Array;
+}
+/**
+*/
 export class ViewKey {
   free(): void;
 /**
@@ -361,14 +663,26 @@ export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembl
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
-  readonly __wbg_viewkey_free: (a: number) => void;
-  readonly viewkey_from_private_key: (a: number) => number;
-  readonly viewkey_from_string: (a: number, b: number) => number;
-  readonly viewkey_to_string: (a: number, b: number) => void;
-  readonly viewkey_to_address: (a: number) => number;
-  readonly viewkey_decrypt: (a: number, b: number, c: number, d: number) => void;
-  readonly __wbg_executionresponse_free: (a: number) => void;
-  readonly executionresponse_getOutputs: (a: number) => number;
+  readonly programmanager_execute_local: (a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number, i: number, j: number, k: number) => void;
+  readonly programmanager_execute: (a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number, i: number, j: number, k: number, l: number, m: number, n: number, o: number, p: number) => number;
+  readonly __wbg_programmanager_free: (a: number) => void;
+  readonly programmanager_new: () => number;
+  readonly programmanager_cacheKeypairInWasmMemory: (a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number) => void;
+  readonly programmanager_getCachedKeypair: (a: number, b: number, c: number, d: number, e: number, f: number) => void;
+  readonly programmanager_synthesizeKeypair: (a: number, b: number, c: number, d: number, e: number, f: number) => void;
+  readonly programmanager_clearKeyCache: (a: number) => void;
+  readonly programmanager_keyExists: (a: number, b: number, c: number, d: number, e: number, f: number) => void;
+  readonly __wbg_transaction_free: (a: number) => void;
+  readonly transaction_fromString: (a: number, b: number, c: number) => void;
+  readonly transaction_toString: (a: number, b: number) => void;
+  readonly transaction_transactionId: (a: number, b: number) => void;
+  readonly transaction_transactionType: (a: number, b: number) => void;
+  readonly __wbg_provingkey_free: (a: number) => void;
+  readonly provingkey_fromBytes: (a: number, b: number, c: number) => void;
+  readonly provingkey_toBytes: (a: number, b: number) => void;
+  readonly __wbg_verifyingkey_free: (a: number) => void;
+  readonly verifyingkey_fromBytes: (a: number, b: number, c: number) => void;
+  readonly verifyingkey_toBytes: (a: number, b: number) => void;
   readonly __wbg_recordplaintext_free: (a: number) => void;
   readonly recordplaintext_fromString: (a: number, b: number, c: number) => void;
   readonly recordplaintext_toString: (a: number, b: number) => void;
@@ -379,36 +693,10 @@ export interface InitOutput {
   readonly privatekeyciphertext_decryptToPrivateKey: (a: number, b: number, c: number, d: number) => void;
   readonly privatekeyciphertext_toString: (a: number, b: number) => void;
   readonly privatekeyciphertext_fromString: (a: number, b: number, c: number) => void;
-  readonly __wbg_feeexecution_free: (a: number) => void;
-  readonly feeexecution_fee: (a: number, b: number) => void;
-  readonly __wbg_program_free: (a: number) => void;
-  readonly program_fromString: (a: number, b: number, c: number) => void;
-  readonly program_toString: (a: number, b: number) => void;
-  readonly program_getFunctions: (a: number) => number;
-  readonly program_getFunctionInputs: (a: number, b: number, c: number, d: number) => void;
-  readonly program_getRecordMembers: (a: number, b: number, c: number, d: number) => void;
-  readonly program_getStructMembers: (a: number, b: number, c: number, d: number) => void;
-  readonly __wbg_recordciphertext_free: (a: number) => void;
-  readonly recordciphertext_fromString: (a: number, b: number, c: number) => void;
-  readonly recordciphertext_toString: (a: number, b: number) => void;
-  readonly recordciphertext_decrypt: (a: number, b: number, c: number) => void;
-  readonly recordciphertext_isOwner: (a: number, b: number) => number;
-  readonly __wbg_transaction_free: (a: number) => void;
-  readonly transaction_fromString: (a: number, b: number, c: number) => void;
-  readonly transaction_toString: (a: number, b: number) => void;
-  readonly transaction_transactionId: (a: number, b: number) => void;
-  readonly transaction_transactionType: (a: number, b: number) => void;
-  readonly __wbg_signature_free: (a: number) => void;
-  readonly signature_sign: (a: number, b: number, c: number) => number;
-  readonly signature_verify: (a: number, b: number, c: number, d: number) => number;
-  readonly signature_from_string: (a: number, b: number) => number;
-  readonly signature_to_string: (a: number, b: number) => void;
-  readonly __wbg_address_free: (a: number) => void;
-  readonly address_from_private_key: (a: number) => number;
-  readonly address_from_view_key: (a: number) => number;
-  readonly address_from_string: (a: number, b: number) => number;
-  readonly address_to_string: (a: number, b: number) => void;
-  readonly address_verify: (a: number, b: number, c: number, d: number) => number;
+  readonly programmanager_transfer: (a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number, i: number, j: number, k: number, l: number, m: number, n: number, o: number, p: number, q: number) => number;
+  readonly programmanager_split: (a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number, i: number) => number;
+  readonly __wbg_executionresponse_free: (a: number) => void;
+  readonly executionresponse_getOutputs: (a: number) => number;
   readonly __wbg_privatekey_free: (a: number) => void;
   readonly privatekey_new: () => number;
   readonly privatekey_from_seed_unchecked: (a: number, b: number) => number;
@@ -420,11 +708,52 @@ export interface InitOutput {
   readonly privatekey_newEncrypted: (a: number, b: number, c: number) => void;
   readonly privatekey_toCiphertext: (a: number, b: number, c: number, d: number) => void;
   readonly privatekey_fromPrivateKeyCiphertext: (a: number, b: number, c: number, d: number) => void;
-  readonly __wbindgen_malloc: (a: number) => number;
-  readonly __wbindgen_realloc: (a: number, b: number, c: number) => number;
+  readonly __wbg_viewkey_free: (a: number) => void;
+  readonly viewkey_from_private_key: (a: number) => number;
+  readonly viewkey_from_string: (a: number, b: number) => number;
+  readonly viewkey_to_string: (a: number, b: number) => void;
+  readonly viewkey_to_address: (a: number) => number;
+  readonly viewkey_decrypt: (a: number, b: number, c: number, d: number) => void;
+  readonly __wbg_signature_free: (a: number) => void;
+  readonly signature_sign: (a: number, b: number, c: number) => number;
+  readonly signature_verify: (a: number, b: number, c: number, d: number) => number;
+  readonly signature_from_string: (a: number, b: number) => number;
+  readonly signature_to_string: (a: number, b: number) => void;
+  readonly programmanager_deploy: (a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number, i: number, j: number, k: number, l: number) => number;
+  readonly __wbg_program_free: (a: number) => void;
+  readonly program_fromString: (a: number, b: number, c: number) => void;
+  readonly program_toString: (a: number, b: number) => void;
+  readonly program_getFunctions: (a: number) => number;
+  readonly program_getFunctionInputs: (a: number, b: number, c: number, d: number) => void;
+  readonly program_getRecordMembers: (a: number, b: number, c: number, d: number) => void;
+  readonly program_getStructMembers: (a: number, b: number, c: number, d: number) => void;
+  readonly program_getCreditsProgram: () => number;
+  readonly program_id: (a: number, b: number) => void;
+  readonly program_isEqual: (a: number, b: number) => number;
+  readonly __wbg_recordciphertext_free: (a: number) => void;
+  readonly recordciphertext_fromString: (a: number, b: number, c: number) => void;
+  readonly recordciphertext_toString: (a: number, b: number) => void;
+  readonly recordciphertext_decrypt: (a: number, b: number, c: number) => void;
+  readonly recordciphertext_isOwner: (a: number, b: number) => number;
+  readonly __wbg_address_free: (a: number) => void;
+  readonly address_from_private_key: (a: number) => number;
+  readonly address_from_view_key: (a: number) => number;
+  readonly address_from_string: (a: number, b: number) => number;
+  readonly address_to_string: (a: number, b: number) => void;
+  readonly address_verify: (a: number, b: number, c: number, d: number) => number;
+  readonly programmanager_join: (a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number, i: number, j: number, k: number, l: number, m: number) => number;
+  readonly __wbg_keypair_free: (a: number) => void;
+  readonly keypair_new: (a: number, b: number) => number;
+  readonly keypair_provingKey: (a: number, b: number) => void;
+  readonly keypair_verifyingKey: (a: number, b: number) => void;
+  readonly __wbindgen_malloc: (a: number, b: number) => number;
+  readonly __wbindgen_realloc: (a: number, b: number, c: number, d: number) => number;
+  readonly __wbindgen_export_2: WebAssembly.Table;
+  readonly _dyn_core__ops__function__FnMut__A____Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__h42a23b745a2a38d9: (a: number, b: number, c: number) => void;
   readonly __wbindgen_add_to_stack_pointer: (a: number) => number;
-  readonly __wbindgen_free: (a: number, b: number) => void;
+  readonly __wbindgen_free: (a: number, b: number, c: number) => void;
   readonly __wbindgen_exn_store: (a: number) => void;
+  readonly wasm_bindgen__convert__closures__invoke2_mut__h3ab6109475e42267: (a: number, b: number, c: number, d: number) => void;
 }
 
 export type SyncInitInput = BufferSource | WebAssembly.Module;
@@ -446,4 +775,4 @@ export function initSync(module: SyncInitInput): InitOutput;
 *
 * @returns {Promise<InitOutput>}
 */
-export default function init (module_or_path?: InitInput | Promise<InitInput>): Promise<InitOutput>;
+export default function __wbg_init (module_or_path?: InitInput | Promise<InitInput>): Promise<InitOutput>;

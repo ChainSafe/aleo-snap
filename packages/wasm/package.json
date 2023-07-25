@@ -20,6 +20,6 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "@aleohq/wasm": "^0.4.1"
+    "@aleohq/wasm": "^0.4.5"
   }
 }

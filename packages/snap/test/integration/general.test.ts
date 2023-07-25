@@ -79,6 +79,31 @@ describe("Integration tests", function () {
     });
   });
 
+  describe("getPrivateKey", function () {
+    it("successfully retrieve private key on confirm", async function () {
+      const invokeAction = metaMask.snaps.invokeSnap(
+        testPage,
+        snapId,
+        Methods.GetPrivateKey
+      );
+
+      await metaMask.snaps.dialog.accept();
+
+      expect(await invokeAction).to.equal(
+        "APrivateKey1zkp5QwXmPphbTQ7PE2gvRiKbXs8gJ8oLYhQLqZNkWsd7iEj"
+      );
+    });
+
+    it("fail retrieve private key on decline", async function () {
+      const expectPromise = expect(
+        metaMask.snaps.invokeSnap(testPage, snapId, Methods.GetPrivateKey)
+      ).to.be.rejectedWith("User decline request");
+
+      await metaMask.snaps.dialog.reject();
+      await expectPromise;
+    });
+  });
+
   describe("decrypt", function () {
     it("successfully decrypt", async function () {
       const invokeAction = await metaMask.snaps.invokeSnap(
