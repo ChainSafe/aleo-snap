@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { formLayout } from '../utils';
 import { useSnap } from '../../hooks/useSnap';
-import { useTransfer } from '../../hooks/useTransfer';
+import { TransferStatus, useTransfer } from '../../hooks/useTransfer';
 
 export type TransferFormData = {
   recipientAddress: string;
@@ -47,6 +47,12 @@ export function TransferFunds(): JSX.Element {
         type: transferStatus.status,
         key: transferStatus.message,
       });
+      if (
+        transferStatus.status === TransferStatus.SUCCESS ||
+        transferStatus.status === TransferStatus.FAILURE
+      ) {
+        void messageApi.destroy('Transaction in progress...');
+      }
     }
   }, [transferStatus]);
 

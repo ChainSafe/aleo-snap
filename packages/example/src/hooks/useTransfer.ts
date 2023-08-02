@@ -7,6 +7,7 @@ import {
   VerifyingKey,
   Program,
 } from '@chainsafe/aleo-snap-wasm/src/index.ts';
+import axios from 'axios';
 import { TransferFormData } from '../components/TransferFunds/TransferFunds';
 
 const isInputEmpty = (obj: TransferFormData): boolean => {
@@ -35,7 +36,7 @@ const TRANSFER_PRIVATE_PROVER_URL =
 const TRANSFER_PRIVATE_VERIFIER_URL =
   'https://testnet3.parameters.aleo.org/transfer_private.verifier.3a59762';
 
-enum TransferStatus {
+export enum TransferStatus {
   IDLE = 'info',
   PENDING = 'loading',
   SUCCESS = 'success',
@@ -81,6 +82,7 @@ export function useTransfer(): ITransfer {
       setTransferStatus({
         status: TransferStatus.PENDING,
         message: 'Transaction in progress...',
+        duration: 0,
       });
       const {
         recipientAddress: recipient,
@@ -119,14 +121,24 @@ export function useTransfer(): ITransfer {
           url,
           true,
         );
-        const transactionID = transferTransaction.transactionId();
-        setTransferStatus({
-          status: TransferStatus.SUCCESS,
-          message: `Transaction successful! Transaction ID: ${transactionID}`,
-          duration: 5,
-        });
-        setTransactionID(transactionID);
-        console.log('Transaction: ', transferTransaction);
+        const transaction = transferTransaction.toString();
+        console.log('Transaction: ', transaction);
+        void axios
+          .post(url + '/testnet3/transaction/broadcast', transaction, {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+          .then((response) => {
+            console.log('Transaction Successful, transaction ID:');
+            console.log(response.data as string);
+            setTransactionID(response.data as string);
+            setTransferStatus({
+              status: TransferStatus.SUCCESS,
+              message: `Transaction successful! Transaction ID: ${transactionID}`,
+              duration: 5,
+            });
+          });
       } catch (err) {
         console.log(err);
         setTransferStatus({
