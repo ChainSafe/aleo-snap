@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/ChainSafe/aleo-snap/compare/aleo-snap-v1.1.1...aleo-snap-v1.2.0) (2023-09-04)
+
+
+### Features
+
+* update manifest proposedName ([#55](https://github.com/ChainSafe/aleo-snap/issues/55)) ([94df5ba](https://github.com/ChainSafe/aleo-snap/commit/94df5bac76b6cb15d6871873b598f6f9e9a1b41e))
+
 ## [1.1.1](https://github.com/ChainSafe/aleo-snap/compare/aleo-snap-v1.1.0...aleo-snap-v1.1.1) (2023-08-02)
 
 
