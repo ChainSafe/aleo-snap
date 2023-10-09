@@ -37,9 +37,9 @@
   "devDependencies": {
     "@aleohq/sdk": "^0.4.3",
     "@chainsafe/dappeteer": "^5.2",
-    "@metamask/snaps-cli": "^2.0.2",
-    "@metamask/snaps-types": "^2.0.0",
-    "@metamask/snaps-ui": "^2.0.0",
+    "@metamask/snaps-cli": "^3.0.0",
+    "@metamask/snaps-types": "^3.0.0",
+    "@metamask/snaps-ui": "^3.0.0",
     "@types/chai": "^4",
     "@types/chai-as-promised": "^7",
     "@types/eslint": "^8.37.0",
@@ -61,6 +61,6 @@
   "dependencies": {
     "@chainsafe/aleo-snap-shared": "workspace:^",
     "@chainsafe/aleo-snap-wasm": "workspace:^",
-    "@metamask/snaps-ui": "^2.0.0"
+    "@metamask/snaps-ui": "^3.0.0"
   }
 }
