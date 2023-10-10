@@ -7,10 +7,10 @@
     "url": "git+https://github.com/chainsafe/aleo-snap.git"
   },
   "source": {
-    "shasum": "nkeXDYmHSKw1gQjHf5gZpmw6w3mXf1zTiE7L2jzpK/A=",
+    "shasum": "Nk/MehUNTsAR74CQQxPPorrzKxcgSMgnOGLNF35Uswo=",
     "location": {
       "npm": {
-        "filePath": "./dist/bundle.js",
+        "filePath": "dist/bundle.js",
         "packageName": "@chainsafe/aleo-snap",
         "registry": "https://registry.npmjs.org/"
       }
