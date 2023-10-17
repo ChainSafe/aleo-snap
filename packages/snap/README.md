@@ -19,7 +19,7 @@ This package provides the functionality to integrate the Aleo blockchain into Me
 ## Requirements
 
 Ensure you are set up and ready to go with the [AleoSnap Monorepo](../../README.md#prerequisites).  
-To use the AleoSnap package, you need to have the [MetaMask Flask](https://metamask.io/flask/) browser extension installed and set up, and be familiar with [developing Snaps](https://metamask.io/snaps/).
+To use the AleoSnap package, you need to have the [MetaMask](https://metamask.io/) browser extension installed and set up, and be familiar with [developing Snaps](https://metamask.io/snaps/).
 
 <a name="usage-and-developing"></a>
 ## Usage and Developing
@@ -29,10 +29,14 @@ To use and develop AleoSnap, you will need to interact with the MetaMask extensi
 <a name="run-local-development-environment"></a>
 ### Run Local Development Environment
 
+Notice:
+Using snap that is running in local enviroment is only available with MetaMask Flask (https://metamask.io/flask), 
+regular MetaMask must not be installed simultaneously.
+
 Run the Snap local development environment:
 
 ```shell
-yarn start
+yarn serve
 ```
 
 <a name="initialize-snap"></a>

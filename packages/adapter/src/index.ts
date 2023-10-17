@@ -1,11 +1,11 @@
-import { isMetaMaskFlaskAvailable, isSnapInstalled } from "./utils";
+import { isMetaMaskAvailable, isSnapInstalled } from "./utils";
 import { AleoSnap } from "./snap";
 
 export { AleoSnap } from "./snap";
 
 const defaultSnapOrigin = "npm:@chainsafe/aleo-snap";
 
-export { isMetaMaskFlaskAvailable, isSnapInstalled } from "./utils";
+export { isMetaMaskAvailable, isSnapInstalled } from "./utils";
 
 export type SnapInstallationParamNames = "version" | string;
 
@@ -24,9 +24,9 @@ export async function enableAleoSnap(
 ): Promise<AleoSnap> {
   const snapId = snapOrigin ?? defaultSnapOrigin;
 
-  // check for metamask flask
-  if (!(await isMetaMaskFlaskAvailable())) {
-    throw new Error("Metamask flask is not installed");
+  // check for metamask
+  if (!(await isMetaMaskAvailable())) {
+    throw new Error("Metamask is not installed");
   }
   // check for snap
   const isInstalled = await isSnapInstalled(snapId);
