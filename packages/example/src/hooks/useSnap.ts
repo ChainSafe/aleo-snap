@@ -1,6 +1,6 @@
 import {
   isSnapInstalled,
-  isMetaMaskFlaskAvailable,
+  isMetaMaskAvailable,
   AleoSnap,
 } from '@chainsafe/aleo-snap-adapter';
 import {
@@ -27,7 +27,7 @@ declare global {
 }
 
 export interface ISnap {
-  isMetaMaskFlask: boolean;
+  isMetaMask: boolean;
   snapInstalled: boolean;
   checksCompleted: boolean;
   enable: () => Promise<void>;
@@ -47,7 +47,7 @@ export interface ISnap {
 }
 
 export function useSnap(): ISnap {
-  const [isMetaMaskFlask, setIsMetaMaskFlask] = useState(false);
+  const [isMetaMask, setIsMetaMask] = useState(false);
   const [snapInstalled, setSnapInstalled] = useState(false);
   const [checksCompleted, setChecksCompleted] = useState(false);
   const [aleoSnapApi, setAleoSnapApi] = useState<AleoSnapApi | null>(null);
@@ -60,7 +60,7 @@ export function useSnap(): ISnap {
   const [records, setRecords] = useState<Records | null>(null);
 
   const enable = useCallback(async () => {
-    if (!isMetaMaskFlask) return;
+    if (!isMetaMask) return;
     const result = await window.ethereum.request<
       Record<aleoSnapOriginKey, { enabled: boolean }>
     >({
@@ -70,7 +70,7 @@ export function useSnap(): ISnap {
       },
     });
     setSnapInstalled(result[snapOrigin].enabled);
-  }, [isMetaMaskFlask]);
+  }, [isMetaMask]);
 
   const showViewKey = useCallback(async () => {
     if (!aleoSnapApi) return;
@@ -125,11 +125,11 @@ export function useSnap(): ISnap {
   //initial checks
   useEffect(() => {
     void (async () => {
-      const isMetaMaskFlask = await isMetaMaskFlaskAvailable();
-      if (!isMetaMaskFlask) return;
+      const isMetaMask = await isMetaMaskAvailable();
+      if (!isMetaMask) return;
       const isInstalled = await isSnapInstalled(snapOrigin);
       setChecksCompleted(true);
-      setIsMetaMaskFlask(isMetaMaskFlask);
+      setIsMetaMask(isMetaMask);
       setSnapInstalled(isInstalled);
     })();
   }, []);
@@ -149,7 +149,7 @@ export function useSnap(): ISnap {
   }, [snapInstalled]);
 
   return {
-    isMetaMaskFlask,
+    isMetaMask,
     snapInstalled,
     checksCompleted,
     enable,

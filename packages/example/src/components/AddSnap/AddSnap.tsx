@@ -10,10 +10,10 @@ export const AddSnap: FC<IAddSnap> = ({ snap }) => {
   return (
     <div>
       <h1>Aleo snap</h1>
-      {!snap.isMetaMaskFlask && snap.checksCompleted && (
-        <Result status="warning" title="Metamask Flask not installed" />
+      {!snap.isMetaMask && snap.checksCompleted && (
+        <Result status="warning" title="Metamask not installed" />
       )}
-      <Button disabled={!snap.isMetaMaskFlask} onClick={() => void snap.enable()}>
+      <Button disabled={!snap.isMetaMask} onClick={() => void snap.enable()}>
         Add Snap
       </Button>
     </div>

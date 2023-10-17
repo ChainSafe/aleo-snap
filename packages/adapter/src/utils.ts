@@ -22,23 +22,23 @@ export async function isSnapInstalled(
   }
 }
 
-async function isMetaMaskFlask(): Promise<boolean> {
+async function isMetaMask(): Promise<boolean> {
   try {
     const walletName = await window.ethereum.request<string>({
       method: "web3_clientVersion",
     });
-    return walletName.includes("flask");
+    return walletName.includes("MetaMask");
   } catch {
     return false;
   }
 }
 
-export async function isMetaMaskFlaskAvailable(): Promise<boolean> {
+export async function isMetaMaskAvailable(): Promise<boolean> {
   if (!window.ethereum) {
     throw new Error("Metamask is not installed");
   }
   return await Promise.race([
-    isMetaMaskFlask(),
+    isMetaMask(),
     // in case of wallet not having rpc method web3_clientVersion
     new Promise<boolean>(() =>
       setTimeout(() => {
