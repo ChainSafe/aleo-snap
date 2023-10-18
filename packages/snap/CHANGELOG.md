@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.2.1](https://github.com/ChainSafe/aleo-snap/compare/aleo-snap-v1.2.0...aleo-snap-v1.2.1) (2023-10-18)
+
+
+### Bug Fixes
+
+* adapter and examole flask flag fix, snap readme ([b1603a1](https://github.com/ChainSafe/aleo-snap/commit/b1603a1e00d5d09b1ad3bc87b09fbc1f3a7ba66e))
+* adapter and example flask flag fix, snap readme ([#61](https://github.com/ChainSafe/aleo-snap/issues/61)) ([b1603a1](https://github.com/ChainSafe/aleo-snap/commit/b1603a1e00d5d09b1ad3bc87b09fbc1f3a7ba66e))
+* logo ([#63](https://github.com/ChainSafe/aleo-snap/issues/63)) ([ac1c7fb](https://github.com/ChainSafe/aleo-snap/commit/ac1c7fbd6c8aeeea8b713a297748ba4c88ec03ec))
+
 ## [1.2.0](https://github.com/ChainSafe/aleo-snap/compare/aleo-snap-v1.1.1...aleo-snap-v1.2.0) (2023-09-04)
 
 
