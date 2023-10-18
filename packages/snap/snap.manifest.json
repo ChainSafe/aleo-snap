@@ -11,6 +11,7 @@
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
+        "iconPath": "images/logo.png",
         "packageName": "@chainsafe/aleo-snap",
         "registry": "https://registry.npmjs.org/"
       }
