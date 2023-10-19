@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.2](https://github.com/ChainSafe/aleo-snap/compare/aleo-snap-v1.2.1...aleo-snap-v1.2.2) (2023-10-19)
+
+
+### Bug Fixes
+
+* missing logo on npm ([#66](https://github.com/ChainSafe/aleo-snap/issues/66)) ([3aa5221](https://github.com/ChainSafe/aleo-snap/commit/3aa52213d9037d8a509940dd5adf54e0fb0d4147))
+
 ## [1.2.1](https://github.com/ChainSafe/aleo-snap/compare/aleo-snap-v1.2.0...aleo-snap-v1.2.1) (2023-10-18)
 
 
