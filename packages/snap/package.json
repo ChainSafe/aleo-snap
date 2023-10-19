@@ -22,7 +22,8 @@
   },
   "files": [
     "snap.manifest.json",
-    "CHANGELOG.md"
+    "CHANGELOG.md",
+    "images/logo.svg"
   ],
   "keywords": [
     "aleo",
