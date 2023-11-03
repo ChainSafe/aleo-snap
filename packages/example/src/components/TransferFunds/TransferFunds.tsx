@@ -23,7 +23,7 @@ export function TransferFunds(): JSX.Element {
 
   const formHook = useForm<TransferFormData>({
     defaultValues: {
-      peerUrl: 'https://vm.aleo.org/api',
+      peerUrl: 'https://api.explorer.aleo.org/v1',
     },
   });
 

@@ -10,6 +10,7 @@ import {
   Records,
 } from '@chainsafe/aleo-snap-shared';
 import { useCallback, useEffect, useState } from 'react';
+import { getPublicBalance } from '../services/node';
 
 const isDev = import.meta.env.DEV;
 const snapOrigin = isDev
@@ -44,6 +45,7 @@ export interface ISnap {
   isMessageVerified: boolean | null;
   showRecords: () => Promise<void>;
   records: Records | null;
+  userPublicBalance: string | undefined;
 }
 
 export function useSnap(): ISnap {
@@ -58,6 +60,7 @@ export function useSnap(): ISnap {
   const [signature, setSignature] = useState<string>('');
   const [isMessageVerified, setIsMessageVerified] = useState<boolean | null>(null);
   const [records, setRecords] = useState<Records | null>(null);
+  const [userPublicBalance, setUserPublicBalance] = useState<string | undefined>();
 
   const enable = useCallback(async () => {
     if (!isMetaMask) return;
@@ -86,7 +89,7 @@ export function useSnap(): ISnap {
 
   const getBalance = useCallback(async () => {
     if (!aleoSnapApi) return;
-    const balance = await aleoSnapApi.getBalance();
+    const balance: Balance = await aleoSnapApi.getBalance();
     setBalance(balance);
   }, [aleoSnapApi]);
 
@@ -148,6 +151,15 @@ export function useSnap(): ISnap {
     }
   }, [snapInstalled]);
 
+  useEffect(() => {
+    if (address) {
+      void (async () => {
+        const publicBalance = await getPublicBalance(address);
+        setUserPublicBalance(publicBalance);
+      })();
+    }
+  }, [address]);
+
   return {
     isMetaMask,
     snapInstalled,
@@ -166,5 +178,6 @@ export function useSnap(): ISnap {
     isMessageVerified,
     showRecords,
     records,
+    userPublicBalance,
   };
 }

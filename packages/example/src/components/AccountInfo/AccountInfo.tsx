@@ -1,17 +1,13 @@
 import { Button, Card, Divider, Form, Input, Row, Col, Statistic } from 'antd';
-import CountUp from 'react-countup';
-import { valueType } from 'antd/es/statistic/utils';
 import { CopyButton, formLayout } from '../utils';
 import { useLatestBlockHeight } from '../../hooks/useLatestBlockHeight.ts';
 import { useSnap } from '../../hooks/useSnap.ts';
-
-const formatter = (value: valueType): JSX.Element => (
-  <CountUp end={Number(value)} separator="," preserveValue />
-);
+import { balanceFormatter, formatter } from '../../utils/index.tsx';
 
 export function AccountInfo(): JSX.Element {
   const block = useLatestBlockHeight();
-  const { address, showViewKey, viewKey, balance, getBalance } = useSnap();
+  const { address, showViewKey, viewKey, balance, getBalance, userPublicBalance } =
+    useSnap();
 
   return (
     <Card
@@ -19,11 +15,16 @@ export function AccountInfo(): JSX.Element {
       style={{ width: '100%', borderRadius: '20px' }}
       bordered={false}
     >
-      <Row align={'middle'} gutter={16}>
-        <Col span={6}>
-          <Statistic title="Balance" value={balance?.balance} formatter={formatter} />
+      <Row justify={'center'} align={'middle'} gutter={16}>
+        <Col span={8}>
+          <Statistic
+            title="Public balance"
+            value={userPublicBalance}
+            formatter={balanceFormatter}
+          />
         </Col>
-        <Col span={6}>
+
+        <Col span={8}>
           <Statistic
             title="Latest Sync Block"
             value={balance?.latestSyncBlock}
@@ -31,18 +32,27 @@ export function AccountInfo(): JSX.Element {
             formatter={formatter}
           />
         </Col>
-        <Col span={6}>
+        <Col span={8}>
+          <Button type="default" size="large" onClick={() => void getBalance()}>
+            {balance === null ? 'Get Private Balance' : 'Refresh Private Balance'}
+          </Button>
+        </Col>
+      </Row>
+      <Row>
+        <Col span={8}>
+          <Statistic
+            title="Private balance"
+            value={balance?.balance}
+            formatter={balanceFormatter}
+          />
+        </Col>
+        <Col span={8}>
           <Statistic
             title="Latest Block"
             value={block}
             precision={2}
             formatter={formatter}
           />
-        </Col>
-        <Col span={6}>
-          <Button type="default" size="large" onClick={() => void getBalance()}>
-            {balance === null ? 'Get Balance' : 'Refresh Balance'}
-          </Button>
         </Col>
       </Row>
       <Divider />
