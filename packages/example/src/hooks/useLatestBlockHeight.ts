@@ -15,7 +15,7 @@ export function useLatestBlockHeight(): number | undefined {
           const height = block.header.metadata.height;
           setBlockNumber((number) => (!number || height > number ? height : number));
         });
-      }, 500) as unknown as number;
+      }, 1000) as unknown as number;
     } catch {
       setBlockNumber(undefined);
     }
