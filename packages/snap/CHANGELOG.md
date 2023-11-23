@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.3](https://github.com/ChainSafe/aleo-snap/compare/aleo-snap-v1.2.2...aleo-snap-v1.2.3) (2023-11-23)
+
+
+### Bug Fixes
+
+* public balance endpoint to example, snap bug fix, fixed api url ([#69](https://github.com/ChainSafe/aleo-snap/issues/69)) ([f9d9181](https://github.com/ChainSafe/aleo-snap/commit/f9d91811e3074b8ad56af60fd12579f9731dc172))
+
 ## [1.2.2](https://github.com/ChainSafe/aleo-snap/compare/aleo-snap-v1.2.1...aleo-snap-v1.2.2) (2023-10-19)
 
 
