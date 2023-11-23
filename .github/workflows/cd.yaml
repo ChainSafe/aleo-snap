@@ -25,7 +25,6 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          cache: 'yarn'
           node-version: 18
           registry-url: 'https://registry.npmjs.org'
         if: ${{ steps.release.outputs.releases_created }}
