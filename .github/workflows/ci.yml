@@ -22,7 +22,7 @@ jobs:
         run: yarn --immutable
       - name: Build
         run: yarn build
-      - uses: tj-actions/verify-changed-files@v9
+      - uses: tj-actions/verify-changed-files@v17
         id: verify-changed-files
         with:
           files: |
