@@ -27,7 +27,6 @@ describe("Integration tests", function () {
       seed: LOCAL_PREFUNDED_MNEMONIC,
       automation: AUTOMATION,
       metaMaskFlask: true,
-      metaMaskVersion: "v10.32.0",
       snapIdOrLocation: builtSnapDir,
     });
 
