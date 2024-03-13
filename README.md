@@ -1,4 +1,7 @@
-# AleoSnap - MetaMask Snap for Aleo ecosystem
+# [ARCHIVED] AleoSnap - MetaMask Snap for Aleo ecosystem
+
+> [!CAUTION]
+> This repository is no longer active. It has been superseded by [AleoHQ/aleo-snap-chainsafe](https://github.com/AleoHQ/aleo-snap-chainsafe).
 
 ## Table of Contents
 
