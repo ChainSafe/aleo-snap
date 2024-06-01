@@ -2,8 +2,8 @@ import { expect, use } from "chai";
 import sinonChai from "sinon-chai";
 import chaiAsPromised from "chai-as-promised";
 import { Dappeteer, DappeteerPage, initSnapEnv } from "@chainsafe/dappeteer";
-import { buildSnap } from "./utils";
 import { Methods } from "@chainsafe/aleo-snap-shared";
+import { buildSnap } from "./utils";
 
 use(sinonChai);
 use(chaiAsPromised);
@@ -111,7 +111,8 @@ describe("Integration tests", function () {
         snapId,
         Methods.Decrypt,
         {
-          cipherText: "record1qyqspcvr3q75x5klxaa88ysjcpx36gz0zalsx7hjn5mtttqndcffxmgzqyxx66trwfhkxun9v35hguerqqpqzq83z5d5jpqwwhdglt05lnaq83dnnkfukg2upfwzywx849s5mkklqssure3s6926z2us892c84dqjm8qarn64z0pcqqw2l3t29jen4cs6c0qfnm",
+          cipherText:
+            "record1qyqspcvr3q75x5klxaa88ysjcpx36gz0zalsx7hjn5mtttqndcffxmgzqyxx66trwfhkxun9v35hguerqqpqzq83z5d5jpqwwhdglt05lnaq83dnnkfukg2upfwzywx849s5mkklqssure3s6926z2us892c84dqjm8qarn64z0pcqqw2l3t29jen4cs6c0qfnm",
         }
       );
 
@@ -132,17 +133,15 @@ describe("Integration tests", function () {
 
       await metaMask.snaps.dialog.accept();
       const result = await invokeAction;
-      expect((result as string).length).to.deep.eq(
-        216
-      );
-      expect((result as string).slice(0,4)).to.deep.eq(
-        "sign"
-      );
+      expect((result as string).length).to.deep.eq(216);
+      expect((result as string).slice(0, 4)).to.deep.eq("sign");
     });
 
     it("fail sign on user decline", async function () {
       const expectPromise = expect(
-        metaMask.snaps.invokeSnap(testPage, snapId, Methods.Sign, { message: "Hello world!" })
+        metaMask.snaps.invokeSnap(testPage, snapId, Methods.Sign, {
+          message: "Hello world!",
+        })
       ).to.be.rejectedWith("Transaction not confirmed");
 
       await metaMask.snaps.dialog.reject();
@@ -156,9 +155,10 @@ describe("Integration tests", function () {
         testPage,
         snapId,
         Methods.Verify,
-        { 
-          message: "Message to verify",  
-          signature: "sign1l4tgm3pdmrqxx9gtz3etp0x9crg6lvtk00980egxdlln7te9qqqnfj7g6zft0ma6f9suj3trwaydhhqt4mhd7zmpxz3ap7jhmnaa6q4g73h4v52d44n48d96eljqhtd2608f3su43qsz40wjelvpwfrwqdxyl7qkskdmghqr6etfu68jshkrlvt5z6hsujg53l927azv5qyssnmcsw9"
+        {
+          message: "Message to verify",
+          signature:
+            "sign1l4tgm3pdmrqxx9gtz3etp0x9crg6lvtk00980egxdlln7te9qqqnfj7g6zft0ma6f9suj3trwaydhhqt4mhd7zmpxz3ap7jhmnaa6q4g73h4v52d44n48d96eljqhtd2608f3su43qsz40wjelvpwfrwqdxyl7qkskdmghqr6etfu68jshkrlvt5z6hsujg53l927azv5qyssnmcsw9",
         }
       );
 
